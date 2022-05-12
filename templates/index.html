@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Suchen{% endblock %}
+{% block content %}
+<form class="uk-form-horizontal uk-margin-large" action="/" method="post">
+
+    <div class=" uk-margin">
+        <label class="uk-form-label" for="title">Titel / Schlagwort(e)</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="title" type="text" value="*">
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="author">Autor</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="author" type="text" value="*">
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="from">Jahr</label>
+        <div class="uk-form-controls">
+            <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-expand@m">
+                    <input class="uk-input" id="from" type="number" value="1900">
+                </div>
+                <div class="uk-width-auto@m">
+                    -
+                </div>
+                <div class="uk-width-expand@m">
+                    <input class="uk-input" id="to" type="number" value="2100">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-select">Art</label>
+        <div class="uk-form-controls">
+            <select class="uk-select" id="form-horizontal-select">
+                <option>Alles</option>
+                <option>Abschlussarbeiten</option>
+                <option>Buch</option>
+                <option>Paper</option>
+                <option>Poster</option>
+                <option>Proceeding</option>
+                <option>Vortrag</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <div class="uk-form-label">Such-Art</div>
+        <div class="uk-form-controls uk-form-controls-text">
+            <label><input class="uk-radio" type="radio" name="radio1"> Titel und Abstract</label><br>
+            <label><input class="uk-radio" type="radio" name="radio1"> Volltext (langsam)</label>
+        </div>
+    </div>
+
+</form>
+
+{% if publications | length > 0 %}
+<p><span uk-icon="database"></span> {{publications | length}} übereinstimmungen in {{queryTime}} Sekunden</p>
+
+{% for pub in publications %}
+<div class="uk-margin uk-card uk-card-default">
+    <div class="uk-card-header">
+        <h3 class="uk-card-title">{{ pub.title | title }}</h3>
+        <h4 class="uk-text-meta">{{ pub.author }} ({{ pub.year }})</h4>
+    </div>
+    <div class="uk-card-body uk-text-justify">
+        {% if pub.keyword is not empty %}
+        <p>{{ pub.abstract }}</p>
+        {% else %}
+        <i class="uk-text-meta">Keine Beschreibung vorhanden.</i>
+        {% endif %}
+    </div>
+    {% if pub.keyword is not empty %}
+    <div class="uk-card-footer">
+        {% for keyword in pub.keyword | split(',') %}
+        <span class="uk-badge">{{keyword}}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/vendor/uikit/uikit/dist/css/uikit.min.css" />
+    <script src="/vendor/uikit/uikit/dist/js/uikit.min.js"></script>
+    <script src="/vendor/uikit/uikit/dist/js/uikit-icons.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body class="uk-container">
+    <header class="uk-margin">
+        <h1>Forschungsdatenbank</h1>
+        <p class="uk-text-lead">Publikationen des Instituts für Kontinuumsmechanik</p>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+    <hr class="uk-divider-icon">
+    <footer>
+        <q>Klarheit in den Worten, Brauchbarkeit in den Sachen.</q> &mdash; G.W. Leibniz
+    </footer>
+</body>
+
+</html>
