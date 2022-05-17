@@ -62,8 +62,8 @@
     </div>
 </form>
 
-{% if publications | length > 0 %}
-<p><span uk-icon="database"></span> {{publications | length}} übereinstimmungen in {{queryTime}} Sekunden</p>
+<p><span uk-icon="database"></span> {{publications | length}} übereinstimmungen in {{queryTime | number_format(4)}}
+    Sekunden</p>
 
 {% for pub in publications %}
 <div class="uk-margin uk-card uk-card-default">
