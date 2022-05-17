@@ -22,8 +22,20 @@ try {
 }
 
 $start = microtime(true);
-$stmt  = $pdo->query('SELECT * FROM publications ORDER BY year DESC, author');
-$pubs  = $stmt->fetchAll();
-$end   = microtime(true);
 
-echo $twig->render('index.html', array('publications' => $pubs, 'queryTime' => ($end - $start)));
+// Step 1: check if parameters have been passed
+if (isset($_POST["title"])) {
+ $stmt = $pdo->prepare('SELECT * FROM publications WHERE title LIKE :title ORDER BY year DESC, author');
+
+ $title = "%" . $_POST["title"] . "%";
+
+ $query = [":title" => $title];
+
+ $stmt->execute($query);
+
+ $pubs = $stmt->fetchAll();
+ $end  = microtime(true);
+ echo $twig->render('index.html', array('publications' => $pubs, 'query' => $query, 'queryTime' => ($end - $start)));
+} else {
+ echo $twig->render('index.html');
+}

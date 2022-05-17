@@ -6,14 +6,15 @@
     <div class=" uk-margin">
         <label class="uk-form-label" for="title">Titel / Schlagwort(e)</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="title" type="text" value="*">
+            <input class="uk-input" id="title" type="text" name="title"
+                value="{{query[':title'] | replace({'%': ''})}}">
         </div>
     </div>
 
     <div class="uk-margin">
         <label class="uk-form-label" for="author">Autor</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="author" type="text" value="*">
+            <input class="uk-input" id="author" type="text" name="author" value="*">
         </div>
     </div>
 
@@ -22,13 +23,13 @@
         <div class="uk-form-controls">
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-expand@m">
-                    <input class="uk-input" id="from" type="number" value="1900">
+                    <input class="uk-input" id="from" type="number" name="beginyear" value="1900">
                 </div>
                 <div class="uk-width-auto@m">
                     -
                 </div>
                 <div class="uk-width-expand@m">
-                    <input class="uk-input" id="to" type="number" value="2100">
+                    <input class="uk-input" id="to" type="number" name="endyear" value="2100">
                 </div>
             </div>
         </div>
@@ -37,7 +38,7 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-select">Art</label>
         <div class="uk-form-controls">
-            <select class="uk-select" id="form-horizontal-select">
+            <select class="uk-select" id="form-horizontal-select" name="pubtype">
                 <option>Alles</option>
                 <option>Abschlussarbeiten</option>
                 <option>Buch</option>
@@ -52,8 +53,9 @@
     <div class="uk-margin">
         <div class="uk-form-label">Such-Art</div>
         <div class="uk-form-controls uk-form-controls-text">
-            <label><input class="uk-radio" type="radio" name="radio1" selected> Titel und Abstract</label><br>
-            <label><input class="uk-radio" type="radio" name="radio1"> Volltext (langsam)</label>
+            <label><input class="uk-radio" type="radio" name="basic" checked> Titel und
+                Abstract</label><br>
+            <label><input class="uk-radio" type="radio" name="full"> Volltext (langsam)</label>
         </div>
     </div>
 
@@ -62,6 +64,7 @@
     </div>
 </form>
 
+{% if publications is defined %}
 <p><span uk-icon="database"></span> {{publications | length}} übereinstimmungen in {{queryTime | number_format(4)}}
     Sekunden</p>
 
