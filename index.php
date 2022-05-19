@@ -25,7 +25,7 @@ $start = microtime(true);
 
 // Step 1: check if parameters have been passed
 if (isset($_POST["title"])) {
- $stmt = $pdo->prepare('SELECT * FROM publications WHERE title LIKE :title ORDER BY year DESC, author');
+ $stmt = $pdo->prepare('SELECT * FROM publications WHERE title LIKE :title OR keyword LIKE :title ORDER BY year DESC, author');
 
  $title = strtolower($_POST["title"]);
 
