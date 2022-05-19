@@ -18,23 +18,25 @@ try {
  throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
-$start = microtime(true);
+$time = microtime(true);
 
 // Step 1: check if parameters have been passed
 if (isset($_POST["title"])) {
- $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :title OR keyword LIKE :title) AND author LIKE :auth ORDER BY year DESC, author');
+ $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :title OR keyword LIKE :title) AND author LIKE :auth AND year BETWEEN :byear AND :eyear ORDER BY year DESC, title');
 
  $title  = strtolower($_POST["title"]);
  $author = strtolower($_POST["author"]);
+ $begin  = $_POST["beginyear"];
+ $end    = $_POST["endyear"];
 
- $query = [":title" => "%" . $title . "%", ":auth" => "%" . $author . "%"];
+ $query = [":title" => "%" . $title . "%", ":auth" => "%" . $author . "%", ":byear" => $begin, "eyear" => $end];
 
  $stmt->execute($query);
 
- $pubs = $stmt->fetchAll();
- $end  = microtime(true);
+ $pubs    = $stmt->fetchAll();
+ $endTime = microtime(true);
 
- echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'queryTime' => ($end - $start)));
+ echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'queryTime' => ($endTime - $time)));
 } else {
  echo $twig->render('index.html');
 }
