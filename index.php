@@ -26,8 +26,8 @@ if (isset($_POST["title"])) {
 
  $title  = strtolower($_POST["title"]);
  $author = strtolower($_POST["author"]);
- $begin  = $_POST["beginyear"];
- $end    = $_POST["endyear"];
+ $begin  = intval($_POST["beginyear"]);
+ $end    = intval($_POST["endyear"]);
 
  $query = [":title" => "%" . $title . "%", ":auth" => "%" . $author . "%", ":byear" => $begin, "eyear" => $end];
 
