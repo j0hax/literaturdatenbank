@@ -6,14 +6,19 @@
     <div class=" uk-margin">
         <label class="uk-form-label" for="title">Titel / Schlagwort(e)</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="title" type="text" name="title" value="{{ qtitle }}">
+            <input class="uk-input" id="title" type="text" name="title" value="{{ qtitle }}"
+                placeholder="z.B. multiscale modeling">
         </div>
     </div>
 
     <div class="uk-margin">
         <label class="uk-form-label" for="author">Autor</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="author" type="text" name="author" value="*">
+            <input class="uk-input" id="author" type="text" name="author" value="{{ qauth }}"
+                placeholder="z.B. Wriggers">
+            <small>
+                <p>Für die besten Ergebnisse, bitte nur Nachnamen ohne Initialien eingeben.</p>
+            </small>
         </div>
     </div>
 

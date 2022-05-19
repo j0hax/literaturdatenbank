@@ -22,18 +22,19 @@ $start = microtime(true);
 
 // Step 1: check if parameters have been passed
 if (isset($_POST["title"])) {
- $stmt = $pdo->prepare('SELECT * FROM publications WHERE title LIKE :title OR keyword LIKE :title ORDER BY year DESC, author');
+ $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :title OR keyword LIKE :title) AND author LIKE :auth ORDER BY year DESC, author');
 
- $title = strtolower($_POST["title"]);
+ $title  = strtolower($_POST["title"]);
+ $author = strtolower($_POST["author"]);
 
- $query = [":title" => "%" . $title . "%"];
+ $query = [":title" => "%" . $title . "%", ":auth" => "%" . $author . "%"];
 
  $stmt->execute($query);
 
  $pubs = $stmt->fetchAll();
  $end  = microtime(true);
 
- echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'queryTime' => ($end - $start)));
+ echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'queryTime' => ($end - $start)));
 } else {
  echo $twig->render('index.html');
 }
