@@ -83,7 +83,7 @@
     </div>
     {% if pub.keyword is not empty %}
     <div class="uk-card-footer">
-        {% for keyword in pub.keyword | split(',') %}
+        {% for keyword in pub.keyword | replace({';': ',', ':': ','}) | split(',') %}
         <span class="uk-badge">{{keyword}}</span>
         {% endfor %}
     </div>
