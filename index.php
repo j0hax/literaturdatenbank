@@ -27,15 +27,16 @@ $start = microtime(true);
 if (isset($_POST["title"])) {
  $stmt = $pdo->prepare('SELECT * FROM publications WHERE title LIKE :title ORDER BY year DESC, author');
 
- $title = "%" . $_POST["title"] . "%";
+ $title = strtolower($_POST["title"]);
 
- $query = [":title" => $title];
+ $query = [":title" => "%" . $title . "%"];
 
  $stmt->execute($query);
 
  $pubs = $stmt->fetchAll();
  $end  = microtime(true);
- echo $twig->render('index.html', array('publications' => $pubs, 'query' => $query, 'queryTime' => ($end - $start)));
+
+ echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'queryTime' => ($end - $start)));
 } else {
  echo $twig->render('index.html');
 }

@@ -6,8 +6,7 @@
     <div class=" uk-margin">
         <label class="uk-form-label" for="title">Titel / Schlagwort(e)</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="title" type="text" name="title"
-                value="{{query[':title'] | replace({'%': ''})}}">
+            <input class="uk-input" id="title" type="text" name="title" value="{{ qtitle }}">
         </div>
     </div>
 
@@ -76,6 +75,9 @@
     </div>
     <div class="uk-card-body uk-text-justify">
         {% if pub.abstract is not empty %}
+        <p>
+            {{ pub.abstract }}
+        </p>
         {% else %}
         <i class="uk-text-meta">Keine Beschreibung vorhanden.</i>
         {% endif %}
