@@ -64,8 +64,8 @@
 </form>
 
 {% if publications is defined %}
-<p><span uk-icon="database"></span> {{publications | length}} übereinstimmungen in {{queryTime | number_format(4)}}
-    Sekunden</p>
+<p><span uk-icon="database"></span> {{publications | length}} übereinstimmungen ({{ queryTime | round(4) }} Sekunden)
+</p>
 
 {% for pub in publications %}
 <div class="uk-margin uk-card uk-card-default uk-card-hover" uk-scrollspy="cls:uk-animation-slide-right">
