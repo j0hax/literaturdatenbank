@@ -84,16 +84,17 @@
             {{ pub.abstract }}
         </p>
         {% else %}
-        <i class="uk-text-meta">Keine Beschreibung vorhanden.</i>
+        <i class="uk-text-meta">Kein Abstract eingetragen.</i>
         {% endif %}
     </div>
-    {% if pub.keyword is not empty %}
     <div class="uk-card-footer">
+        {% if pub.keyword is not empty %}
         {% for keyword in pub.keyword | replace({';': ',', ':': ','}) | split(',') %}
         <span class="uk-badge">{{keyword | title}}</span>
         {% endfor %}
+        {% endif %}
+        <p class="uk-align-right">#{{ pub.id }}</p>
     </div>
-    {% endif %}
 </div>
 {% endfor %}
 {% endif %}
