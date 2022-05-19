@@ -75,8 +75,7 @@
         <h4 class="uk-text-meta">{{ pub.author }} ({{ pub.year }})</h4>
     </div>
     <div class="uk-card-body uk-text-justify">
-        {% if pub.keyword is not empty %}
-        <p>{{ pub.abstract }}</p>
+        {% if pub.abstract is not empty %}
         {% else %}
         <i class="uk-text-meta">Keine Beschreibung vorhanden.</i>
         {% endif %}
