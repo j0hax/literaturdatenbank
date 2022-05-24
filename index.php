@@ -24,7 +24,7 @@ $time = microtime(true);
 if (isset($_POST["title"])) {
 
  // Prepared statement
- $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :title OR keyword LIKE :title) AND author LIKE :auth AND year BETWEEN :byear AND :eyear AND type LIKE :type ORDER BY year DESC, title');
+ $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :title OR keyword LIKE :title OR abstract LIKE :title) AND author LIKE :auth AND year BETWEEN :byear AND :eyear AND type LIKE :type ORDER BY year DESC, title');
 
  $title  = strtolower($_POST["title"]);
  $author = strtolower($_POST["author"]);
