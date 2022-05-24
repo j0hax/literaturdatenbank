@@ -13,17 +13,23 @@
     </style>
 </head>
 
-<body class="uk-container">
-    <header class="uk-margin">
-        <h1>Forschungsdatenbank</h1>
-        <p class="uk-text-lead">Publikationen des Instituts für Kontinuumsmechanik</p>
+<body>
+    <header class="uk-section uk-section-primary">
+        <div class="uk-container uk-container-xsmall">
+            <h1>Forschungsdatenbank</h1>
+            <p class="uk-text-lead">Publikationen des Instituts für Kontinuumsmechanik</p>
+        </div>
     </header>
     <main>{% block content %}{% endblock %}</main>
     <hr class="uk-divider-icon">
-    <blockquote cite="#">
-        <p class="uk-margin-small-bottom">Klarheit in den Worten, Brauchbarkeit in den Sachen.</p>
-        <footer>G.W. Leibniz</footer>
-    </blockquote>
+    <footer class="uk-section">
+        <div class="uk-container uk-container-xsmall">
+            <blockquote cite="#">
+                <p class="uk-margin-small-bottom">Klarheit in den Worten, Brauchbarkeit in den Sachen.</p>
+                <footer>G.W. Leibniz</footer>
+            </blockquote>
+        </div>
+    </footer>
 </body>
 
 </html>

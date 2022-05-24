@@ -6,6 +6,9 @@ $twig   = new \Twig\Environment($loader, [
  'cache' => '/tmp',
 ]);
 
+use Twig\Extra\String\StringExtension;
+$twig->addExtension(new StringExtension());
+
 $host = 'db';
 $db   = 'ikm';
 $user = getenv('DB_USER');

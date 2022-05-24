@@ -1,6 +1,7 @@
 {
     "require": {
         "twig/twig": "^3.3",
-        "uikit/uikit": "^3.14"
+        "uikit/uikit": "^3.14",
+        "twig/string-extra": "^3.4"
     }
 }

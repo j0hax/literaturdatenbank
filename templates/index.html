@@ -1,104 +1,116 @@
 {% extends "base.html" %}
 {% block title %}Suchen{% endblock %}
 {% block content %}
-<form class="uk-form-horizontal uk-margin-large" action="/" method="post">
+<div class="uk-section uk-section-muted">
+    <div class="uk-container uk-container-xsmall">
+        <form class="uk-form-horizontal" action="/" method="post">
 
-    <div class=" uk-margin">
-        <label class="uk-form-label" for="title">Titel / Schlagwort(e)</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="title" type="text" name="title" value="{{ qtitle }}"
-                placeholder="z.B. multiscale modeling">
-        </div>
-    </div>
-
-    <div class="uk-margin">
-        <label class="uk-form-label" for="author">Autor</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="author" type="text" name="author" value="{{ qauth }}"
-                placeholder="z.B. Wriggers">
-            <small>
-                <p>Für die besten Ergebnisse, bitte nur Nachnamen ohne Initialien eingeben.</p>
-            </small>
-        </div>
-    </div>
-
-    <div class="uk-margin">
-        <label class="uk-form-label" for="from">Jahr</label>
-        <div class="uk-form-controls">
-            <div class="uk-grid-small" uk-grid>
-                <div class="uk-width-expand@m">
-                    <input class="uk-input" id="from" type="number" name="beginyear"
-                        value="{% if qstart is defined %}{{ qstart }}{% else %}0{% endif %}">
-                </div>
-                <div class="uk-width-auto@m">
-                    <span class="uk-input uk-form-blank">bis</span>
-                </div>
-                <div class="uk-width-expand@m">
-                    <input class="uk-input" id="to" type="number" name="endyear"
-                        value="{% if qend is defined %}{{ qend }}{% else %}{{ 'now' | date('Y') }}{% endif %}">
+            <div class=" uk-margin">
+                <label class="uk-form-label" for="title">Titel / Schlagwort(e)</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" id="title" type="text" name="title" value="{{ qtitle }}"
+                        placeholder="z.B. multiscale modeling" autofocus>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="uk-margin">
-        <label class="uk-form-label" for="form-horizontal-select">Art</label>
-        <div class="uk-form-controls">
-            <select class="uk-select" id="form-horizontal-select" name="pubtype">
-                <option value="%" {% if qtype=="%" %}selected{%endif%}>Alles</option>
-                <option value="thesis" {% if qtype=="thesis" %}selected{%endif%}>Abschlussarbeiten</option>
-                <option value="book" {% if qtype=="book" %}selected{%endif%}>Buch</option>
-                <option value="paper" {% if qtype=="paper" %}selected{%endif%}>Paper</option>
-                <option value="poster" {% if qtype=="poster" %}selected{%endif%}>Poster</option>
-                <option value="proceeding" {% if qtype=="proceeding" %}selected{%endif%}>Proceeding</option>
-                <option value="talk" {% if qtype=="talk" %}selected{%endif%}>Vortrag</option>
-            </select>
-        </div>
-    </div>
+            <div class="uk-margin">
+                <label class="uk-form-label" for="author">Autor</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" id="author" type="text" name="author" value="{{ qauth }}"
+                        placeholder="z.B. Wriggers">
+                    <small>
+                        <p>Für die besten Ergebnisse, bitte nur Nachnamen ohne Initialien eingeben.</p>
+                    </small>
+                </div>
+            </div>
 
-    <div class="uk-margin">
-        <div class="uk-form-label">Such-Art</div>
-        <div class="uk-form-controls">
-            <label><input class="uk-radio" type="radio" name="searchtype" value="basic" checked> Titel und
-                Abstract</label><br>
-            <label><input class="uk-radio" type="radio" name="searchtype" value="full" disabled> Volltext
-                (langsam)</label>
-        </div>
-    </div>
+            <div class="uk-margin">
+                <label class="uk-form-label" for="from">Jahr</label>
+                <div class="uk-form-controls">
+                    <div class="uk-grid-small" uk-grid>
+                        <div class="uk-width-expand@m">
+                            <input class="uk-input" id="from" type="number" name="beginyear"
+                                value="{% if qstart is defined %}{{ qstart }}{% else %}0{% endif %}">
+                        </div>
+                        <div class="uk-width-auto@m">
+                            <span class="uk-input uk-form-blank">bis</span>
+                        </div>
+                        <div class="uk-width-expand@m">
+                            <input class="uk-input" id="to" type="number" name="endyear"
+                                value="{% if qend is defined %}{{ qend }}{% else %}{{ 'now' | date('Y') }}{% endif %}">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="uk-margin">
-        <input type="submit" class="uk-button uk-button-primary">
-    </div>
-</form>
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-horizontal-select">Art</label>
+                <div class="uk-form-controls">
+                    <select class="uk-select" id="form-horizontal-select" name="pubtype">
+                        <option value="%" {% if qtype=="%" %}selected{%endif%}>Alles</option>
+                        <option value="thesis" {% if qtype=="thesis" %}selected{%endif%}>Abschlussarbeiten</option>
+                        <option value="book" {% if qtype=="book" %}selected{%endif%}>Buch</option>
+                        <option value="paper" {% if qtype=="paper" %}selected{%endif%}>Paper</option>
+                        <option value="poster" {% if qtype=="poster" %}selected{%endif%}>Poster</option>
+                        <option value="proceeding" {% if qtype=="proceeding" %}selected{%endif%}>Proceeding</option>
+                        <option value="talk" {% if qtype=="talk" %}selected{%endif%}>Vortrag</option>
+                    </select>
+                </div>
+            </div>
 
-{% if publications is defined %}
-<p><span uk-icon="database"></span> {{publications | length}} übereinstimmungen ({{ queryTime | round(4) }} Sekunden)
-</p>
+            <div class="uk-margin">
+                <div class="uk-form-label">Such-Art</div>
+                <div class="uk-form-controls">
+                    <label><input class="uk-radio" type="radio" name="searchtype" value="basic" checked> Titel und
+                        Abstract</label><br>
+                    <label><input class="uk-radio" type="radio" name="searchtype" value="full" disabled> Volltext
+                        (langsam)</label>
+                </div>
+            </div>
 
-{% for pub in publications %}
-<div class="uk-margin uk-card uk-card-default uk-card-hover" uk-scrollspy="cls:uk-animation-slide-right">
-    <div class="uk-card-header">
-        <h3 class="uk-card-title">{{ pub.title }}</h3>
-        <h4 class="uk-text-meta">{{ pub.author }} ({{ pub.type | title }}, {{ pub.year }})</h4>
-    </div>
-    <div class="uk-card-body uk-text-justify">
-        {% if pub.abstract is not empty %}
-        <p>
-            {{ pub.abstract }}
-        </p>
-        {% else %}
-        <i class="uk-text-meta">Kein Abstract eingetragen.</i>
-        {% endif %}
-    </div>
-    <div class="uk-card-footer">
-        {% if pub.keyword is not empty %}
-        {% for keyword in pub.keyword | replace({';': ',', ':': ','}) | split(',') %}
-        <span class="uk-badge">{{keyword | title}}</span>
-        {% endfor %}
-        {% endif %}
-        <p class="uk-align-right">#{{ pub.id }}</p>
+            <div class="uk-margin">
+                <input type="submit" class="uk-button uk-button-primary">
+            </div>
+        </form>
     </div>
 </div>
-{% endfor %}
+{% if publications is defined %}
+<div class="uk-section">
+    <div class="uk-container uk-container-xsmall">
+        {% if publications | length == 0 %}
+        <h2>Keine Übereinstimmungen :(</h2>
+        <p>Leider wurden keine Werke gefunden. Bitte überprüfen Sie ihre Sucheinstellungen erneut.</p>
+        <p><strong>Tipp:</strong> Im Titel- und Autorenfeld kann <a
+                href="https://dev.mysql.com/doc/refman/8.0/en/pattern-matching.html" target="_blank">SQL Pattern
+                Matching</a>
+            verwendet werden.</p>
+        {% endif %}
+
+        {% for pub in publications %}
+        <div class="uk-margin uk-card uk-card-default uk-card-hover" uk-scrollspy="cls:uk-animation-slide-right">
+            <div class="uk-card-header">
+                <h3 class="uk-card-title">{{ pub.title }}</h3>
+                <h4 class="uk-text-meta">{{ pub.author }} ({{ pub.type | title }}, {{ pub.year }})</h4>
+            </div>
+            <div class="uk-card-body uk-text-justify">
+                {% if pub.abstract is not empty %}
+                <p>{{ pub.abstract | u.truncate(2000, '...', false) }}</p>
+                {% else %}
+                <i class="uk-text-meta">Kein Abstract eingetragen.</i>
+                {% endif %}
+            </div>
+            <div class="uk-card-footer">
+                {% if pub.keyword is not empty %}
+                {% for keyword in pub.keyword | replace({';': ',', ':': ','}) | split(',') %}
+                <span class="uk-badge">{{keyword | title}}</span>
+                {% endfor %}
+                {% endif %}
+                <p class="uk-align-right">#{{ pub.id }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
 {% endif %}
 {% endblock %}
