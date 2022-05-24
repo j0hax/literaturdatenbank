@@ -22,21 +22,24 @@ $time = microtime(true);
 
 // Step 1: check if parameters have been passed
 if (isset($_POST["title"])) {
- $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :title OR keyword LIKE :title) AND author LIKE :auth AND year BETWEEN :byear AND :eyear ORDER BY year DESC, title');
+
+ // Prepared statement
+ $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :title OR keyword LIKE :title) AND author LIKE :auth AND year BETWEEN :byear AND :eyear AND type LIKE :type ORDER BY year DESC, title');
 
  $title  = strtolower($_POST["title"]);
  $author = strtolower($_POST["author"]);
  $begin  = intval($_POST["beginyear"]);
  $end    = intval($_POST["endyear"]);
+ $type   = strtolower($_POST["pubtype"]);
 
- $query = [":title" => "%" . $title . "%", ":auth" => "%" . $author . "%", ":byear" => $begin, "eyear" => $end];
+ $query = [":title" => "%" . $title . "%", ":auth" => "%" . $author . "%", ":byear" => $begin, "eyear" => $end, "type" => $type];
 
  $stmt->execute($query);
 
  $pubs    = $stmt->fetchAll();
  $endTime = microtime(true);
 
- echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'queryTime' => ($endTime - $time)));
+ echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type, 'queryTime' => ($endTime - $time)));
 } else {
  echo $twig->render('index.html');
 }
