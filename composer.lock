@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab44b3a8dc29313c8cc5a2b8e21d347d",
+    "content-hash": "38360af939c0b4ae7b4dc6b538345aa1",
     "packages": [
+        {
+            "name": "mathjax/mathjax",
+            "version": "3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mathjax/MathJax.git",
+                "reference": "559183b7075bc96b69bdbb54f4314e9cbe9d7a06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mathjax/MathJax/zipball/559183b7075bc96b69bdbb54f4314e9cbe9d7a06",
+                "reference": "559183b7075bc96b69bdbb54f4314e9cbe9d7a06",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "MathJax Consortium",
+                    "homepage": "https://github.com/mathjax"
+                }
+            ],
+            "description": "MathJax is an open-source JavaScript display engine for LaTeX, MathML, and AsciiMath notation that works in all modern browsers.",
+            "homepage": "http://www.mathjax.org/",
+            "keywords": [
+                "AsciiMath",
+                "JS",
+                "MathML",
+                "latex",
+                "math"
+            ],
+            "funding": [
+                {
+                    "url": "https://numfocus.org/donate-to-mathjax",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/numfocus",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-19T20:53:16+00:00"
+        },
         {
             "name": "symfony/polyfill-ctype",
             "version": "v1.25.0",
