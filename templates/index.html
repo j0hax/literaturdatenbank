@@ -95,7 +95,7 @@
             </div>
             <div class="uk-card-body uk-text-justify">
                 {% if pub.abstract is not empty %}
-                <p>{{ pub.abstract | u.truncate(2000, '...', false) }}</p>
+                <p>{{ pub.abstract | u.truncate(1000, '...', false) }}</p>
                 {% else %}
                 <i class="uk-text-meta">Kein Abstract eingetragen.</i>
                 {% endif %}
