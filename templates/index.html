@@ -89,7 +89,8 @@
         {% for pub in publications %}
         <div class="uk-margin uk-card uk-card-default uk-card-hover" uk-scrollspy="cls:uk-animation-slide-right">
             <div class="uk-card-header">
-                <h3 class="uk-card-title">{{ pub.title }}</h3>
+                <h3 class="uk-card-title"><a href="/document.php?id={{ pub.id }}" target="_blank">{{ pub.title }}</a>
+                </h3>
                 <h4 class="uk-text-meta">{{ pub.author }} ({{ pub.type | title }}, {{ pub.year }})</h4>
             </div>
             <div class="uk-card-body uk-text-justify">
