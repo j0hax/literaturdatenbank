@@ -88,6 +88,11 @@
 
         {% for pub in publications %}
         <div class="uk-margin uk-card uk-card-default uk-card-hover" uk-scrollspy="cls:uk-animation-slide-right">
+            {% if pub.path_img %}
+            <div class="uk-card-media-top">
+                <img src="/data/{{ pub.path_img }}" style="width: 100%; max-height: 256px; object-fit: cover;">
+            </div>
+            {% endif %}
             <div class="uk-card-header">
                 <h3 class="uk-card-title"><a href="/document.php?id={{ pub.id }}" target="_blank">{{ pub.title }}</a>
                 </h3>

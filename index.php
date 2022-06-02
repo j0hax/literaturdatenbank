@@ -42,6 +42,22 @@ if (isset($_POST["title"])) {
  $pubs    = $stmt->fetchAll();
  $endTime = microtime(true);
 
+ // Path hack
+ function fix_path(&$val, $key)
+ {
+  if (str_starts_with($key, "path")) {
+   if ($val[$key][0] != '/') {
+    $val[$key] = '/' . $val[$key];
+   }
+  }
+ }
+
+ foreach ($pubs as &$p) {
+  if ($p['path'][0] == '/') {
+   $p['path'] = substr($p['path'], 1);
+  }
+ }
+
  echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type, 'queryTime' => ($endTime - $time)));
 } else {
  echo $twig->render('index.html');

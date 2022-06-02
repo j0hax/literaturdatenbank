@@ -15,8 +15,15 @@
         <ul class="uk-switcher">
             <li>
                 <ul class="uk-list uk-list-divider">
-                    <li><a href=""><span uk-icon="file-pdf"></span> PDF Herunterladen</a></li>
-                    <li><a href=""><span uk-icon="folder"></span> Vollständiges Archiv</a></li>
+                    {% if document.path %}
+                    <li><span uk-icon="file-pdf"></span> <a href="/data/{{ document.path }}">PDF
+                            Ansehen</a></li>
+                    {% endif %}
+                    {% if document.path_zip %}
+                    <li><span uk-icon="folder"></span> <a href="/data/{{ document.path_zip }}" download>Archiv
+                            Herunterladen</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </li>
             <li>
