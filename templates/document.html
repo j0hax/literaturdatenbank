@@ -10,7 +10,7 @@
         <ul class="uk-child-width-expand" uk-tab>
             <li class="uk-active"><a href="#">Herunterladen</a></li>
             <li><a href="#">Quellenangabe</a></li>
-            <li class="uk-disabled"><a>Metadaten</a></li>
+            <li><a href="#">Metadaten</a></li>
         </ul>
         <ul class="uk-switcher">
             <li>
@@ -26,6 +26,7 @@
                     document.id }}) [{{ document.type | title }}, Leibniz Universität Hannover]</blockquote>
             </li>
             <li>
+                <pre><code>{{ document | json_encode(constant('JSON_PRETTY_PRINT')) }}</code></pre>
             </li>
         </ul>
     </div>
