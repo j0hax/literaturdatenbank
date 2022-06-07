@@ -3,7 +3,7 @@
 {% block content %}
 <div class="uk-section uk-section-muted">
     <div class="uk-container uk-container-xsmall">
-        <form class="uk-form-horizontal" action="/" method="post">
+        <form class="uk-form-horizontal" action="/" method="get">
 
             <div class=" uk-margin">
                 <label class="uk-form-label" for="title">Titel / Schlagwort(e)</label>
@@ -29,14 +29,14 @@
                 <div class="uk-form-controls">
                     <div class="uk-grid-small" uk-grid>
                         <div class="uk-width-expand@m">
-                            <input class="uk-input" id="from" type="number" name="beginyear"
+                            <input class="uk-input" id="from" type="number" name="begin"
                                 value="{% if qstart is defined %}{{ qstart }}{% else %}0{% endif %}">
                         </div>
                         <div class="uk-width-auto@m">
                             <span class="uk-input uk-form-blank">bis</span>
                         </div>
                         <div class="uk-width-expand@m">
-                            <input class="uk-input" id="to" type="number" name="endyear"
+                            <input class="uk-input" id="to" type="number" name="end"
                                 value="{% if qend is defined %}{{ qend }}{% else %}{{ 'now' | date('Y') }}{% endif %}">
                         </div>
                     </div>

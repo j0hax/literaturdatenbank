@@ -24,16 +24,16 @@ try {
 $time = microtime(true);
 
 // Step 1: check if parameters have been passed
-if (isset($_POST["title"])) {
+if (isset($_GET["title"])) {
 
  // Prepared statement
  $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :title OR keyword LIKE :title OR abstract LIKE :title) AND author LIKE :auth AND year BETWEEN :byear AND :eyear AND type LIKE :type ORDER BY year DESC, title');
 
- $title  = strtolower($_POST["title"]);
- $author = strtolower($_POST["author"]);
- $begin  = intval($_POST["beginyear"]);
- $end    = intval($_POST["endyear"]);
- $type   = strtolower($_POST["pubtype"]);
+ $title  = strtolower($_GET["title"]);
+ $author = strtolower($_GET["author"]);
+ $begin  = intval($_GET["begin"]);
+ $end    = intval($_GET["end"]);
+ $type   = strtolower($_GET["pubtype"]);
 
  $query = [":title" => "%" . $title . "%", ":auth" => "%" . $author . "%", ":byear" => $begin, "eyear" => $end, "type" => $type];
 
