@@ -21,6 +21,16 @@ try {
  throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
+function fix_url(?string &$url)
+{
+ if (is_null($url)) {
+  $url = "";
+  return;
+ }
+
+ $url = implode('/', array_map('rawurlencode', explode('/', $url)));
+}
+
 // Step 1: check if parameters have been passed
 if (isset($_GET["id"])) {
 
@@ -33,7 +43,13 @@ if (isset($_GET["id"])) {
 
  $pub = $stmt->fetch();
 
+ fix_url($pub['path']);
+ fix_url($pub['path_img']);
+ fix_url($pub['path_zip']);
+ fix_url($pub['path_url']);
+
  echo $twig->render('document.html', array('document' => $pub));
+
 } else {
  header('Location: /');
  exit;
