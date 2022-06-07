@@ -6,7 +6,13 @@
         <h1>{{ document.title }}</h1>
         <h2>{{ document.author }}</h2>
         <h3>{{ document.type | title }}, {{ document.year }}</h3>
-        <p class="uk-text-justify">{{ document.abstract }}</p>
+        {% if document.abstract is not empty %}
+        <p class="uk-text-justify">
+            {{ document.abstract }}
+            {% else %}
+            <i class="uk-text-meta">Kein Abstract eingetragen.</i>
+            {% endif %}
+        </p>
         <ul class="uk-child-width-expand" uk-tab>
             <li class="uk-active"><a href="#">Herunterladen</a></li>
             <li><a href="#">Quellenangabe</a></li>
