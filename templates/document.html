@@ -16,7 +16,7 @@
         <ul class="uk-child-width-expand" uk-tab>
             <li class="uk-active"><a href="#">Herunterladen</a></li>
             <li><a href="#">Quellenangabe</a></li>
-            <li><a href="#">Metadaten</a></li>
+            <li><a href="#">Bearbeiten</a></li>
         </ul>
         <ul class="uk-switcher">
             <li>
@@ -38,7 +38,67 @@
                     document.id }}) [{{ document.type | title }}, Leibniz Universität Hannover]</blockquote>
             </li>
             <li>
-                <pre><code>{{ document | json_encode(constant('JSON_PRETTY_PRINT')) }}</code></pre>
+                <form class="uk-form-horizontal" action="/edit.php" method="post">
+
+                    <div class=" uk-margin">
+                        <label class="uk-form-label" for="title">Titel</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="title" type="text" name="title" value="{{ document.title }}">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="author">Autor(en)</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="author" type="text" name="author" value="{{ document.author }}">
+                            <small>
+                                <p>Für die besten Ergebnisse, bitte nur Initialien und Nachnamen eingeben.</p>
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="year">Jahr</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="year" type="text" name="year" value="{{ document.year }}">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-horizontal-select">Art</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" id="form-horizontal-select" name="pubtype">
+                                <option value="thesis" {% if document.type=="thesis" %}selected{%endif%}>
+                                    Abschlussarbeiten
+                                </option>
+                                <option value="book" {% if document.type=="book" %}selected{%endif%}>Buch</option>
+                                <option value="paper" {% if document.type=="paper" %}selected{%endif%}>Paper</option>
+                                <option value="poster" {% if document.type=="poster" %}selected{%endif%}>Poster</option>
+                                <option value="proceeding" {% if document.type=="proceeding" %}selected{%endif%}>
+                                    Proceeding
+                                </option>
+                                <option value="talk" {% if document.type=="talk" %}selected{%endif%}>Vortrag</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class=" uk-margin">
+                        <label class="uk-form-label" for="abstract">Abstract</label>
+                        <div class="uk-form-controls">
+                            <textarea class="uk-textarea" id="abstract" rows="5"
+                                name="abstract">{{ document.abstract }}</textarea>
+                            <small>
+                                <p>Formeln können hier wie bei LaTeX eingegeben werden: <code>\(x^2 + y^2 = z^2\)</code>
+                                    wird zu \(x^2 + y^2 = z^2\)</p>
+                            </small>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="id" value="{{ document.id }}">
+                    <div class="uk-margin">
+                        <input type="submit" class="uk-button uk-button-primary">
+                    </div>
+                </form>
             </li>
         </ul>
     </div>
