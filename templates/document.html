@@ -87,16 +87,20 @@
                         <div class="uk-form-controls">
                             <textarea class="uk-textarea" id="abstract" rows="5"
                                 name="abstract">{{ document.abstract }}</textarea>
-                            <small>
-                                <p>Formeln können hier wie bei LaTeX eingegeben werden: <code>\(x^2 + y^2 = z^2\)</code>
+                            <div uk-alert>
+                                <a class="uk-alert-close" uk-close></a>
+                                <p>Formeln können im Abstract wie bei LaTeX eingegeben werden:
+                                    <code>\(x^2 + y^2 = z^2\)</code>
                                     wird zu \(x^2 + y^2 = z^2\)</p>
-                            </small>
+                            </div>
                         </div>
                     </div>
 
                     <input type="hidden" name="id" value="{{ document.id }}">
                     <div class="uk-margin">
-                        <input type="submit" class="uk-button uk-button-primary">
+                        <div class="uk-form-controls">
+                            <input type="submit" value="Speichern" class="uk-button uk-button-primary">
+                        </div>
                     </div>
                 </form>
             </li>
