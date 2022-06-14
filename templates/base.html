@@ -13,13 +13,16 @@
 </head>
 
 <body>
-    <header class="uk-section uk-section-xsmall uk-section-primary">
-        <div class="uk-container uk-container-xsmall">
-            <h1 class="uk-h2">
-                <img src="/img/ikm-logo.svg" style="height: 1em; margin-right: 0.5em;">Forschungsdatenbank
-            </h1>
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="/"><img src="/img/ikm-logo.svg"
+                    style="height: 1em; margin-right: 0.5em;"> IKM Forschungsdatenbank</a>
+            <ul class="uk-navbar-nav">
+                <li><a href="/submit.php">Werk Eintragen</a></li>
+                <li><a href="mailto:admin@ikm.uni-hannover.de">Kontakt</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
     <main>{% block content %}{% endblock %}</main>
     <footer class="uk-section uk-section-xsmall uk-section-muted">
         <div class="uk-container uk-container-xsmall">
