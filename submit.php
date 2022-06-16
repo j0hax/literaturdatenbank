@@ -28,7 +28,7 @@ if (isset($_FILES["pdf"])) {
  }
 
  {
-  $order = [date("Y"), sanitize($_POST["author"])];
+  $order = [sanitize($_POST["year"]), sanitize($_POST["author"]), sanitize($_POST["title"])];
  }
 
  $dir = join(DIRECTORY_SEPARATOR, $order);
