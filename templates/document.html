@@ -60,7 +60,7 @@
                     <div class="uk-margin">
                         <label class="uk-form-label" for="year">Jahr</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="year" type="text" name="year" value="{{ document.year }}">
+                            <input class="uk-input" id="year" type="number" name="year" value="{{ document.year }}">
                         </div>
                     </div>
 
@@ -82,17 +82,11 @@
                         </div>
                     </div>
 
-                    <div class=" uk-margin">
+                    <div class="uk-margin">
                         <label class="uk-form-label" for="abstract">Abstract</label>
                         <div class="uk-form-controls">
                             <textarea class="uk-textarea" id="abstract" rows="5"
                                 name="abstract">{{ document.abstract }}</textarea>
-                            <div uk-alert>
-                                <a class="uk-alert-close" uk-close></a>
-                                <p>Formeln können im Abstract wie bei LaTeX eingegeben werden:
-                                    <code>\(x^2 + y^2 = z^2\)</code>
-                                    wird zu \(x^2 + y^2 = z^2\)</p>
-                            </div>
                         </div>
                     </div>
 
