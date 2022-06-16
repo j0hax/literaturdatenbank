@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/include/database.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig   = new \Twig\Environment($loader, [
@@ -9,18 +10,6 @@ $twig   = new \Twig\Environment($loader, [
 
 use Twig\Extra\String\StringExtension;
 $twig->addExtension(new StringExtension());
-
-$host = 'db';
-$db   = 'ikm';
-$user = getenv('DB_USER');
-$pass = getenv('DB_PASSWORD');
-
-$dsn = "mysql:host=$host;dbname=$db";
-try {
- $pdo = new PDO($dsn, $user, $pass);
-} catch (\PDOException $e) {
- throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
 
 function sanitize(string $filename)
 {
@@ -45,16 +34,19 @@ if (isset($_FILES["pdf"])) {
  $dir = join(DIRECTORY_SEPARATOR, $order);
 
  # TODO: configurable data dir
- $root = "data" . DIRECTORY_SEPARATOR;
- mkdir($root .  $dir, recursive: true);
+ $datadir = "data" . DIRECTORY_SEPARATOR;
+
+ if (!file_exists($datadir . $dir)) {
+  mkdir($root .  $dir, recursive: true);
+ }
 
  $tmp_name = $_FILES["pdf"]["tmp_name"];
  $file_location = join(DIRECTORY_SEPARATOR, [$dir, sanitize($_FILES["pdf"]["name"])]);
 
- move_uploaded_file($tmp_name,  $root . $file_location);
-
+ move_uploaded_file($tmp_name,  $datadir . $file_location);
 
  // Add entry to database
+ $pdo = get_db();
  $stmt = $pdo->prepare('INSERT INTO publications (title, author, year, abstract, path, type) VALUES (:title, :author, :year, :abstract, :path, :type)');
  $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":year" => $_POST["year"], ":abstract" => $_POST["abstract"], ":path" => $file_location, "type" => $_POST["pubtype"]];
  $stmt->execute($query);
