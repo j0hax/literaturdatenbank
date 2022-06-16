@@ -37,7 +37,7 @@ if (isset($_FILES["pdf"])) {
  $datadir = "data" . DIRECTORY_SEPARATOR;
 
  if (!file_exists($datadir . $dir)) {
-  mkdir($root .  $dir, recursive: true);
+  mkdir($datadir .  $dir, recursive: true);
  }
 
  $tmp_name = $_FILES["pdf"]["tmp_name"];
