@@ -59,7 +59,7 @@ if (isset($_FILES["pdf"])) {
  $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":year" => $_POST["year"], ":abstract" => $_POST["abstract"], ":path" => $file_location, "type" => $_POST["pubtype"]];
  $stmt->execute($query);
 
- $id = $pdo->query('select LAST_INSERT_ID();')->fetch()[0];
+ $id = $pdo->lastInsertId();
 
 
  // Redirect to the new document page
