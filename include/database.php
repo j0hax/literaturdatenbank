@@ -6,7 +6,7 @@ function get_db()
  $user = getenv('DB_USER');
  $pass = getenv('DB_PASSWORD');
 
- $dsn = "mysql:host=$host;dbname=$db";
+ $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
  try {
   $pdo = new PDO($dsn, $user, $pass);
   $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
