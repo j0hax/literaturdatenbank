@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "mathjax/mathjax",
-            "version": "3.2.1",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mathjax/MathJax.git",
-                "reference": "559183b7075bc96b69bdbb54f4314e9cbe9d7a06"
+                "reference": "600692ad9d3552cc25f85510d5797bc942ecc9f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mathjax/MathJax/zipball/559183b7075bc96b69bdbb54f4314e9cbe9d7a06",
-                "reference": "559183b7075bc96b69bdbb54f4314e9cbe9d7a06",
+                "url": "https://api.github.com/repos/mathjax/MathJax/zipball/600692ad9d3552cc25f85510d5797bc942ecc9f7",
+                "reference": "600692ad9d3552cc25f85510d5797bc942ecc9f7",
                 "shasum": ""
             },
             "type": "library",
@@ -50,7 +50,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-19T20:53:16+00:00"
+            "time": "2022-06-08T17:40:11+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
