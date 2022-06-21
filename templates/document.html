@@ -94,6 +94,19 @@
                         </div>
                     </div>
 
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="password">Passwort</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="password" type="password" name="password" value="" required>
+                            {% if not document.password %}
+                            <p>
+                                <em>Achtung:</em> das Password für dieses Dokument nach der Bearbeitung dauerhaft
+                                gesetzt, und muss bei jeder nachträglichen Bearbeitung wieder eingegeben werden.
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+
                     <input type="hidden" name="id" value="{{ document.id }}">
                     <div class="uk-margin">
                         <div class="uk-form-controls">
