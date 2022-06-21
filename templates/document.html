@@ -16,6 +16,7 @@
         <ul class="uk-child-width-expand" uk-tab>
             <li class="uk-active"><a href="#">Herunterladen</a></li>
             <li><a href="#">Quellenangabe</a></li>
+            <li><a href="#">Metadaten</a></li>
             <li><a href="#">Bearbeiten</a></li>
         </ul>
         <ul class="uk-switcher">
@@ -36,6 +37,9 @@
                     }}. ({{
                     document.year }}). {{ document.title | title }} (Document No. {{
                     document.id }}) [{{ document.type | title }}, Leibniz Universität Hannover]</blockquote>
+            </li>
+            <li>
+                <pre><code>{{ document|json_encode(constant('JSON_PRETTY_PRINT')) }}</code></pre>
             </li>
             <li>
                 <form class="uk-form-horizontal" action="/edit.php" method="post">

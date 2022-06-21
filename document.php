@@ -37,6 +37,8 @@ if (isset($_GET["id"])) {
  fix_url($pub['path_zip']);
  fix_url($pub['path_url']);
 
+ // The hash is nobody's business
+ unset($pub['password']);
  echo $twig->render('document.html', array('document' => $pub));
 
 } else {
