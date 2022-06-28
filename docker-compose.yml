@@ -11,7 +11,7 @@ services:
     volumes:
       - sqldata:/var/lib/mysql
   web:
-    image: ghcr.io/j0hax/literatur-datenbank:main
+    build: .
     restart: always
     environment:
       - DB_USER=$DBUSER
