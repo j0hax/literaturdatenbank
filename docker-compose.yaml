@@ -1,0 +1,30 @@
+version: "3"
+services:
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      - MARIADB_DATABASE=$DB
+      - MARIADB_USER=$DBUSER
+      - MARIADB_PASSWORD=$DBPASSWORD
+      - MARIADB_RANDOM_ROOT_PASSWORD=true
+    volumes:
+      - sqldata:/var/lib/mysql
+  web:
+    image: ghcr.io/j0hax/literatur-datenbank:main
+    restart: always
+    environment:
+      - DB_USER=$DBUSER
+      - DB_PASSWORD=$DBPASSWORD
+    ports:
+      - "8080:80"
+    volumes:
+      - files:/var/www/html/data
+  watchtower:
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  files:
+  sqldata:
