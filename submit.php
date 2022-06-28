@@ -23,8 +23,9 @@ function sanitize(string $filename)
 // Check if a file has been uploaded
 if (isset($_FILES["pdf"])) {
 
- if ($_FILES["pdf"]["error"] != UPLOAD_ERR_OK) {
-  die("Fehler beim hochladen der Datei");
+ $errcode = $_FILES["pdf"]["error"];
+ if ($errcode != UPLOAD_ERR_OK) {
+  die("Fehler beim hochladen der Datei. Fehlercode: ". $errcode);
  }
 
  {
