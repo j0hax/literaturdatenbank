@@ -20,17 +20,14 @@ function sanitize(string $filename)
  return preg_replace("/[^a-zA-Z0-9_.\-]+/", "", $result);
 }
 
-// Check if a file has been uploaded
-if (isset($_FILES["pdf"])) {
-
- $errcode = $_FILES["pdf"]["error"];
+function store(array $file): string
+{
+ $errcode = $file["error"];
  if ($errcode != UPLOAD_ERR_OK) {
-  die("Fehler beim hochladen der Datei. Fehlercode: ". $errcode);
+  die("Fehler beim hochladen der Datei. Fehlercode: " . $errcode);
  }
 
- {
-  $order = [sanitize($_POST["year"]), sanitize($_POST["author"]), sanitize($_POST["title"])];
- }
+ $order = [sanitize($_POST["year"]), sanitize($_POST["author"]), sanitize($_POST["title"])];
 
  $dir = join(DIRECTORY_SEPARATOR, $order);
 
@@ -38,25 +35,33 @@ if (isset($_FILES["pdf"])) {
  $datadir = "data" . DIRECTORY_SEPARATOR;
 
  if (!file_exists($datadir . $dir)) {
-  mkdir($datadir .  $dir, recursive: true);
+  mkdir($datadir . $dir, 0755, true);
  }
 
- $tmp_name = $_FILES["pdf"]["tmp_name"];
- $file_location = join(DIRECTORY_SEPARATOR, [$dir, sanitize($_FILES["pdf"]["name"])]);
+ $tmp_name      = $file["tmp_name"];
+ $file_location = join(DIRECTORY_SEPARATOR, [$dir, sanitize($file["name"])]);
 
- move_uploaded_file($tmp_name,  $datadir . $file_location);
+ move_uploaded_file($tmp_name, $datadir . $file_location);
+
+ return $file_location;
+}
+
+// Check if a file has been uploaded
+if (isset($_FILES["pdf"])) {
+
+ $file_location    = store($_FILES["pdf"]);
+ $archive_location = store($_FILES["zip"]);
 
  // Add entry to database
- $pdo = get_db();
- $stmt = $pdo->prepare('INSERT INTO publications (title, author, year, abstract, path, type, password) VALUES (:title, :author, :year, :abstract, :path, :type, :password)');
- $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":year" => $_POST["year"], ":abstract" => $_POST["abstract"], ":path" => $file_location, ":type" => $_POST["pubtype"], ":password" => password_hash($_POST["password"], PASSWORD_DEFAULT)];
+ $pdo   = get_db();
+ $stmt  = $pdo->prepare('INSERT INTO publications (title, author, year, abstract, path, path_zip, type, password) VALUES (:title, :author, :year, :abstract, :path, :path_zip, :type, :password)');
+ $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":year" => $_POST["year"], ":abstract" => $_POST["abstract"], ":path" => $file_location, ":path_zip" => $archive_location, ":type" => $_POST["pubtype"], ":password" => password_hash($_POST["password"], PASSWORD_DEFAULT)];
  $stmt->execute($query);
 
  $id = $pdo->lastInsertId();
 
-
  // Redirect to the new document page
- header("Location: /document.php?id=".$id);
+ header("Location: /document.php?id=" . $id);
  die();
 }
 
