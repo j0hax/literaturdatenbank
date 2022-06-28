@@ -48,8 +48,8 @@ if (isset($_FILES["pdf"])) {
 
  // Add entry to database
  $pdo = get_db();
- $stmt = $pdo->prepare('INSERT INTO publications (title, author, year, abstract, path, type) VALUES (:title, :author, :year, :abstract, :path, :type)');
- $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":year" => $_POST["year"], ":abstract" => $_POST["abstract"], ":path" => $file_location, "type" => $_POST["pubtype"]];
+ $stmt = $pdo->prepare('INSERT INTO publications (title, author, year, abstract, path, type, password) VALUES (:title, :author, :year, :abstract, :path, :type, :password)');
+ $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":year" => $_POST["year"], ":abstract" => $_POST["abstract"], ":path" => $file_location, ":type" => $_POST["pubtype"], ":password" => password_hash($_POST["password"], PASSWORD_DEFAULT)];
  $stmt->execute($query);
 
  $id = $pdo->lastInsertId();
