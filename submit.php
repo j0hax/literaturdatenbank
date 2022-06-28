@@ -13,11 +13,14 @@ $twig->addExtension(new StringExtension());
 
 function sanitize(string $filename)
 {
+ // Lowercase
+ $result = strtolower($filename);
+
  // Spaces to underscores
- $result = str_replace(" ", "_", $filename);
+ $result = str_replace(" ", "_", $result);
 
  // Allow only alphanumeric, underscore, period and dash
- return preg_replace("/[^a-zA-Z0-9_.\-]+/", "", $result);
+ return preg_replace("/[^a-z0-9_.\-]+/", "", $result);
 }
 
 function store(array $file, array $allowed): string
