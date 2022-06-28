@@ -20,7 +20,7 @@ function sanitize(string $filename)
  return preg_replace("/[^a-zA-Z0-9_.\-]+/", "", $result);
 }
 
-function store(array $file): string
+function store(array $file, array $allowed): string
 {
  $errcode = $file["error"];
  if ($errcode != UPLOAD_ERR_OK) {
@@ -38,7 +38,14 @@ function store(array $file): string
   mkdir($datadir . $dir, 0755, true);
  }
 
- $tmp_name      = $file["tmp_name"];
+ $tmp_name = $file["tmp_name"];
+ $mtype    = mime_content_type($tmp_name);
+
+ # Ensure the file is of the correct MIME type
+ if (!in_array($mtype, $allowed)) {
+  die("Fehler: falsche Dateiart für " . $file["name"] . ", erwarte eins von " . implode(", ", $allowed));
+ }
+
  $file_location = join(DIRECTORY_SEPARATOR, [$dir, sanitize($file["name"])]);
 
  move_uploaded_file($tmp_name, $datadir . $file_location);
@@ -49,8 +56,8 @@ function store(array $file): string
 // Check if a file has been uploaded
 if (isset($_FILES["pdf"])) {
 
- $file_location    = store($_FILES["pdf"]);
- $archive_location = store($_FILES["zip"]);
+ $file_location    = store($_FILES["pdf"], ["application/pdf"]);
+ $archive_location = store($_FILES["zip"], ["application/zip", "application/x-gzip"]);
 
  // Add entry to database
  $pdo   = get_db();
