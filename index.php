@@ -10,8 +10,6 @@ $twig   = new \Twig\Environment($loader, [
 use Twig\Extra\String\StringExtension;
 $twig->addExtension(new StringExtension());
 
-$time = microtime(true);
-
 // Step 1: check if parameters have been passed
 if (isset($_GET["title"])) {
 
@@ -30,10 +28,9 @@ if (isset($_GET["title"])) {
 
  $stmt->execute($query);
 
- $pubs    = $stmt->fetchAll();
- $endTime = microtime(true);
+ $pubs = $stmt->fetchAll();
 
- echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type, 'queryTime' => ($endTime - $time)));
+ echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type));
 } else {
  echo $twig->render('index.html');
 }
