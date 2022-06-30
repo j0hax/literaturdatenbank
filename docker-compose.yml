@@ -8,6 +8,7 @@ services:
       - MARIADB_USER=$DBUSER
       - MARIADB_PASSWORD=$DBPASSWORD
       - MARIADB_RANDOM_ROOT_PASSWORD=true
+      - MARIADB_AUTO_UPGRADE=true
     volumes:
       - sqldata:/var/lib/mysql
   web:
