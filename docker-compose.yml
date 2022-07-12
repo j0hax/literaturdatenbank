@@ -21,6 +21,13 @@ services:
       - "8080:80"
     volumes:
       - files:/var/www/html/data
+  beisitzer:
+    image: ghcr.io/j0hax/beisitzer:main
+    environment:
+      - DB_USER=$DBUSER
+      - DB_PASSWORD=$DBPASSWORD
+    volumes:
+      - files:/data
   watchtower:
     image: containrrr/watchtower
     restart: always
