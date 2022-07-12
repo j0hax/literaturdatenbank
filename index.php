@@ -30,7 +30,7 @@ if (isset($_GET["title"])) {
 
  $pubs = $stmt->fetchAll();
 
- echo $twig->render('index.html', array('publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type));
+ echo $twig->render('index.html', ['doctypes' => DOC_TYPES, 'publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type]);
 } else {
- echo $twig->render('index.html');
+ echo $twig->render('index.html', ['doctypes' => DOC_TYPES]);
 }

@@ -72,16 +72,11 @@
                         <label class="uk-form-label" for="form-horizontal-select">Art</label>
                         <div class="uk-form-controls">
                             <select class="uk-select" id="form-horizontal-select" name="pubtype">
-                                <option value="thesis" {% if document.type=="thesis" %}selected{%endif%}>
-                                    Abschlussarbeiten
+                                {% for key,value in doctypes %}
+                                <option value="{{key}} {% if document.type==key %}selected{% endif %}">
+                                    {{value}}
                                 </option>
-                                <option value="book" {% if document.type=="book" %}selected{%endif%}>Buch</option>
-                                <option value="paper" {% if document.type=="paper" %}selected{%endif%}>Paper</option>
-                                <option value="poster" {% if document.type=="poster" %}selected{%endif%}>Poster</option>
-                                <option value="proceeding" {% if document.type=="proceeding" %}selected{%endif%}>
-                                    Proceeding
-                                </option>
-                                <option value="talk" {% if document.type=="talk" %}selected{%endif%}>Vortrag</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>

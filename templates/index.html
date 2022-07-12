@@ -44,13 +44,12 @@
                 <label class="uk-form-label" for="form-horizontal-select">Art</label>
                 <div class="uk-form-controls">
                     <select class="uk-select" id="form-horizontal-select" name="pubtype">
-                        <option value="%" {% if qtype=="%" %}selected{%endif%}>Alles</option>
-                        <option value="thesis" {% if qtype=="thesis" %}selected{%endif%}>Abschlussarbeiten</option>
-                        <option value="book" {% if qtype=="book" %}selected{%endif%}>Buch</option>
-                        <option value="paper" {% if qtype=="paper" %}selected{%endif%}>Paper</option>
-                        <option value="poster" {% if qtype=="poster" %}selected{%endif%}>Poster</option>
-                        <option value="proceeding" {% if qtype=="proceeding" %}selected{%endif%}>Proceeding</option>
-                        <option value="talk" {% if qtype=="talk" %}selected{%endif%}>Vortrag</option>
+                        <option value="%">Alles</option>
+                        {% for key,value in doctypes %}
+                        <option value="{{key}} {% if qtype==key %}selected{% endif %}">
+                            {{value}}
+                        </option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>

@@ -40,7 +40,7 @@ if (isset($_GET["id"])) {
  // The hash is nobody's business:
  // We overwrite this value with a simple boolean to tell if a document is protected or not.
  $pub['password'] = !(is_null($pub["password"]));
- echo $twig->render('document.html', array('document' => $pub));
+ echo $twig->render('document.html', ['document' => $pub, 'doctypes' => DOC_TYPES]);
 
 } else {
  header('Location: /');

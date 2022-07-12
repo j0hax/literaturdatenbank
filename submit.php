@@ -78,4 +78,4 @@ if (isset($_FILES["pdf"])) {
  die();
 }
 
-echo $twig->render('submit.html');
+echo $twig->render('submit.html', ['doctypes' => DOC_TYPES]);
