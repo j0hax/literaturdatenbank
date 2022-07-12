@@ -37,5 +37,6 @@ Nachdem das Repository geklont wurde muss noch `composer install` ausgeführt we
 | path_img | varchar(300)  | YES  |     | NULL                      |                |
 | path_url | varchar(300)  | YES  |     | NULL                      |                |
 | password | varchar(300)  | YES  |     | NULL                      |                |
+| text     | mediumtext    | YES  |     | NULL                      |                |
 +----------+---------------+------+-----+---------------------------+----------------+
 ```

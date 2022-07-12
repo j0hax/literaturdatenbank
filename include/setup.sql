@@ -11,5 +11,6 @@ CREATE TABLE IF NOT EXISTS `publications` (
   `path_img` varchar(300) DEFAULT NULL,
   `path_url` varchar(300) DEFAULT NULL,
   `password` varchar(300) DEFAULT NULL,
+  `text` MEDIUMTEXT DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
