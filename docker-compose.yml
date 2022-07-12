@@ -17,6 +17,8 @@ services:
     environment:
       - DB_USER=$DBUSER
       - DB_PASSWORD=$DBPASSWORD
+      - SMTP_SERVER=$SMTP_SERVER
+      - ADMIN_EMAIL=$ADMIN_EMAIL
     ports:
       - "8080:80"
     volumes:

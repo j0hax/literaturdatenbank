@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/include/database.php';
+require_once __DIR__ . '/include/mail.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig   = new \Twig\Environment($loader, [
@@ -69,6 +70,8 @@ if (isset($_FILES["pdf"])) {
  $stmt->execute($query);
 
  $id = $pdo->lastInsertId();
+
+ sendMail(getenv('ADMIN_EMAIL'), "Neuer Eintrag", "Ein neuer Eintrag wurde in der Literaturdatenbank erstellt (ID $id)");
 
  // Redirect to the new document page
  header("Location: /document.php?id=" . $id);

@@ -3,6 +3,7 @@
         "twig/twig": "^3.3",
         "uikit/uikit": "^3.14",
         "twig/string-extra": "^3.4",
-        "mathjax/mathjax": "^3.2"
+        "mathjax/mathjax": "^3.2",
+        "phpmailer/phpmailer": "^6.6"
     }
 }
