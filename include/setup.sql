@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `publications` (
   `author` varchar(300) NOT NULL,
   `date` date NOT NULL DEFAULT curdate(),
   `keyword` varchar(300) DEFAULT NULL,
-  `abstract` varchar(5000) DEFAULT NULL,
+  `abstract` TEXT DEFAULT NULL,
   `path` varchar(300) NOT NULL,
   `type` varchar(30) NOT NULL,
   `path_zip` varchar(300) DEFAULT NULL,
