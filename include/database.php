@@ -23,4 +23,4 @@ function get_db()
 }
 
 // Types of Documents supported by BibTex
-const DOC_TYPES = ['article' => 'Artikel', 'book' => 'Buch', 'booklet' => 'Heft/Brochüre', 'inproceedings' => 'Vortrag', 'manual' => 'Handbuch', 'mastersthesis' => 'Masterarbeit', 'misc' => 'Verschiedenes', 'phdthesis' => 'Doktorarbeit', 'proceedings' => 'Tagung', 'techreport' => 'Technischer Bericht', 'unpublished' => 'Unveröffentlicht'];
+const DOC_TYPES = ['article' => 'Artikel', 'book' => 'Buch', 'booklet' => 'Heft/Brochüre', 'inproceedings' => 'Vortrag', 'manual' => 'Handbuch', 'masterthesis' => 'Masterarbeit', 'misc' => 'Verschiedenes', 'phdthesis' => 'Doktorarbeit', 'proceedings' => 'Tagung', 'techreport' => 'Technischer Bericht', 'unpublished' => 'Unveröffentlicht'];
