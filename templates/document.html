@@ -33,10 +33,20 @@
                 </ul>
             </li>
             <li>
+                <h4>APA Style</h4>
                 <blockquote uk-tooltip="title: Automatisch generiert und ohne Gewähr; pos: bottom">{{ document.author
                     }}. ({{
-                    document.year }}). {{ document.title | title }} (Document No. {{
+                    document.date | date("Y") }}). {{ document.title | title }} (Document No. {{
                     document.id }}) [{{ document.type | title }}, Leibniz Universität Hannover]</blockquote>
+                <h4>BibTeX</h4>
+                <pre>
+@{{ document.type }}{{ '{' ~ document.author ~ document.date | date("Y") }}
+    title = "{{ document.title }}"
+    author = "{{ document.author }}"
+    year = "{{ document.date | date("Y") }}"
+    month = "{{ document.date | date("M") }}"
+}
+</pre>
             </li>
             <li>
                 <pre><code>{{ document|json_encode(constant('JSON_PRETTY_PRINT')) }}</code></pre>
