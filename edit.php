@@ -15,8 +15,8 @@ if (isset($_POST["title"])) {
 
  if (is_null($existing) || password_verify($_POST["password"], $existing)) {
   $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-  $stmt     = $pdo->prepare('UPDATE publications SET title = :title, author = :auth, year = :year, abstract = :abstract, type = :type, keyword = :keywords, password = :password WHERE id = :docid');
-  $query    = [":docid" => intval($_POST["id"]), ":title" => $_POST["title"], ":auth" => $_POST["author"], ":year" => intval($_POST["year"]), ":abstract" => $_POST["abstract"], ":type" => $_POST["pubtype"], ":keywords" => $_POST["keywords"], ":password" => $password];
+  $stmt     = $pdo->prepare('UPDATE publications SET title = :title, author = :auth, date = :date, abstract = :abstract, type = :type, keyword = :keywords, password = :password WHERE id = :docid');
+  $query    = [":docid" => intval($_POST["id"]), ":title" => $_POST["title"], ":auth" => $_POST["author"], ":date" => $_POST["date"], ":abstract" => $_POST["abstract"], ":type" => $_POST["pubtype"], ":keywords" => $_POST["keywords"], ":password" => $password];
   $stmt->execute($query);
 
   header("Location: /document.php?id=" . $query[":docid"]);

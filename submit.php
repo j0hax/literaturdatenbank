@@ -31,7 +31,7 @@ function store(array $file, array $allowed): string
   die("Fehler beim hochladen der Datei. Fehlercode: " . $errcode);
  }
 
- $order = [sanitize($_POST["year"]), sanitize($_POST["author"]), sanitize($_POST["title"])];
+ $order = [sanitize($_POST["date"]), sanitize($_POST["author"]), sanitize($_POST["title"])];
 
  $dir = join(DIRECTORY_SEPARATOR, $order);
 
@@ -65,8 +65,8 @@ if (isset($_FILES["pdf"])) {
 
  // Add entry to database
  $pdo   = get_db();
- $stmt  = $pdo->prepare('INSERT INTO publications (title, author, year, abstract, keyword, path, path_zip, type, password) VALUES (:title, :author, :year, :abstract, :keyword, :path, :path_zip, :type, :password)');
- $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":year" => $_POST["year"], ":abstract" => $_POST["abstract"], ":keyword" => $_POST["keywords"], ":path" => $file_location, ":path_zip" => $archive_location, ":type" => $_POST["pubtype"], ":password" => password_hash($_POST["password"], PASSWORD_DEFAULT)];
+ $stmt  = $pdo->prepare('INSERT INTO publications (title, author, date, abstract, keyword, path, path_zip, type, password) VALUES (:title, :author, :date, :abstract, :keyword, :path, :path_zip, :type, :password)');
+ $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":date" => $_POST["date"], ":abstract" => $_POST["abstract"], ":keyword" => $_POST["keywords"], ":path" => $file_location, ":path_zip" => $archive_location, ":type" => $_POST["pubtype"], ":password" => password_hash($_POST["password"], PASSWORD_DEFAULT)];
  $stmt->execute($query);
 
  $id = $pdo->lastInsertId();

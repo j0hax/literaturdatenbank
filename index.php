@@ -16,12 +16,12 @@ if (isset($_GET["title"])) {
  $pdo = get_db();
 
  // Prepared statement
- $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :search OR keyword LIKE :search OR abstract LIKE :search) AND author LIKE :auth AND type LIKE :type AND year BETWEEN :byear AND :eyear ORDER BY year DESC, title');
+ $stmt = $pdo->prepare('SELECT * FROM publications WHERE (title LIKE :search OR keyword LIKE :search OR abstract LIKE :search) AND author LIKE :auth AND type LIKE :type AND date BETWEEN :byear AND :eyear ORDER BY date DESC, title');
 
  $title  = $_GET['title'];
  $author = ucwords($_GET["author"]);
- $begin  = intval($_GET["begin"]);
- $end    = intval($_GET["end"]);
+ $begin  = intval($_GET["begin"]) . "-01-01";
+ $end    = intval($_GET["end"]) + 1 . "-01-01";
  $type   = strtolower($_GET["pubtype"]);
 
  $query = [":search" => "%$title%", ":auth" => "%$author%", "type" => $type, ":byear" => $begin, "eyear" => $end];

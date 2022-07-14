@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `publications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(300) NOT NULL,
   `author` varchar(300) NOT NULL,
-  `year` year(4) NOT NULL DEFAULT year(current_timestamp()),
+  `date` date NOT NULL DEFAULT CURDATE(),
   `keyword` varchar(300) DEFAULT NULL,
   `abstract` varchar(5000) DEFAULT NULL,
   `path` varchar(300) NOT NULL,

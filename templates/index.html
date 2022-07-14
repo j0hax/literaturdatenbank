@@ -28,14 +28,14 @@
                     <div class="uk-grid-small" uk-grid>
                         <div class="uk-width-expand@m">
                             <input class="uk-input" id="from" type="number" name="begin"
-                                value="{% if qstart is defined %}{{ qstart }}{% else %}1900{% endif %}">
+                                value="{% if qstart is defined %}{{ qstart | date('Y') }}{% else %}1900{% endif %}">
                         </div>
                         <div class="uk-width-auto@m">
                             <span class="uk-input uk-form-blank">bis</span>
                         </div>
                         <div class="uk-width-expand@m">
                             <input class="uk-input" id="to" type="number" name="end"
-                                value="{% if qend is defined %}{{ qend }}{% else %}{{ 'now' | date('Y') }}{% endif %}">
+                                value="{% if qend is defined %}{{ qend | date('Y') - 1 }}{% else %}{{ 'now' | date('Y') }}{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
             <div class="uk-card-header">
                 <h3 class="uk-card-title"><a href="/document.php?id={{ pub.id }}" target="_blank">{{ pub.title }}</a>
                 </h3>
-                <h4 class="uk-text-meta">{{ pub.author }} ({{ pub.type | title }}, {{ pub.year }})</h4>
+                <h4 class="uk-text-meta">{{ pub.author }} ({{ pub.type | title }}, {{ pub.date | date("Y") }})</h4>
             </div>
             <div class="uk-card-body uk-text-justify">
                 {% if pub.abstract is not empty %}

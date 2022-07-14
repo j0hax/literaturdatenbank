@@ -5,7 +5,7 @@
     <div class="uk-container uk-container-xsmall">
         <h1>{{ document.title }}</h1>
         <h2>{{ document.author }}</h2>
-        <h3>{{ document.type | title }}, {{ document.year }}</h3>
+        <h3>{{ document.type | title }}, {{ document.date | date("Y") }}</h3>
         {% if document.abstract is not empty %}
         <p class="uk-text-justify">
             {{ document.abstract }}
@@ -62,9 +62,9 @@
                     </div>
 
                     <div class="uk-margin">
-                        <label class="uk-form-label" for="year">Jahr</label>
+                        <label class="uk-form-label" for="date">Jahr</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="year" type="number" name="year" value="{{ document.year }}">
+                            <input class="uk-input" id="date" type="date" name="date" value="{{ document.date }}">
                         </div>
                     </div>
 
