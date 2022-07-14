@@ -40,7 +40,7 @@
                     document.id }}) [{{ document.type | title }}, Leibniz Universität Hannover]</blockquote>
                 <h4>BibTeX</h4>
                 <pre>
-@{{ document.type }}{{ '{' ~ document.author ~ document.date | date("Y") }}
+@{{ document.type }}{{ '{' ~ document.author | split(' ') | last ~ document.date | date("Y") }}
     title = "{{ document.title }}"
     author = "{{ document.author }}"
     year = "{{ document.date | date("Y") }}"
