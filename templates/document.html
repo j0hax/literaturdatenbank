@@ -73,7 +73,7 @@
                         <div class="uk-form-controls">
                             <select class="uk-select" id="form-horizontal-select" name="pubtype">
                                 {% for key,value in doctypes %}
-                                <option value="{{key}} {% if document.type==key %}selected{% endif %}">
+                                <option value="{{key}}" {% if document.type==key %}selected{% endif %}>
                                     {{value}}
                                 </option>
                                 {% endfor %}
