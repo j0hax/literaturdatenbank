@@ -56,10 +56,11 @@
             <div class="uk-margin">
                 <div class="uk-form-label">Such-Art</div>
                 <div class="uk-form-controls">
-                    <label><input class="uk-radio" type="radio" name="searchtype" value="basic" checked> Titel und
+                    <label><input class="uk-radio" type="radio" name="searchtype" value="general" {% if stype!="full"
+                            %}checked{% endif %}> Titel und
                         Abstract</label><br>
-                    <label><input class="uk-radio" type="radio" name="searchtype" value="full" disabled> Volltext
-                        (langsam)</label>
+                    <label><input class="uk-radio" type="radio" name="searchtype" value="full" {% if stype=="full"
+                            %}checked{% endif %}> Volltext</label>
                 </div>
             </div>
             <div class="uk-margin">
