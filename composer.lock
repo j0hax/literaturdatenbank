@@ -825,16 +825,16 @@
         },
         {
             "name": "uikit/uikit",
-            "version": "v3.14.3",
+            "version": "v3.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uikit/uikit.git",
-                "reference": "fa1b93f6c2ac73aa3f7a0ab8633e54d7ac6f1974"
+                "reference": "82db8d0135cc3cfe85b6887792265e3de6562109"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uikit/uikit/zipball/fa1b93f6c2ac73aa3f7a0ab8633e54d7ac6f1974",
-                "reference": "fa1b93f6c2ac73aa3f7a0ab8633e54d7ac6f1974",
+                "url": "https://api.github.com/repos/uikit/uikit/zipball/82db8d0135cc3cfe85b6887792265e3de6562109",
+                "reference": "82db8d0135cc3cfe85b6887792265e3de6562109",
                 "shasum": ""
             },
             "type": "library",
@@ -855,7 +855,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-27T11:33:32+00:00"
+            "time": "2022-07-15T12:31:46+00:00"
         }
     ],
     "packages-dev": [],
