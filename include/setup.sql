@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `publications` (
   `path_zip` varchar(300) DEFAULT NULL,
   `path_img` varchar(300) DEFAULT NULL,
   `path_url` varchar(300) DEFAULT NULL,
-  `password` varchar(300) DEFAULT NULL,
+  `password` char(60) DEFAULT NULL,
   `text` MEDIUMTEXT DEFAULT NULL,
   `last_modified` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
