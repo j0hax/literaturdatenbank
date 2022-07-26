@@ -60,13 +60,28 @@ function store(array $file, array $allowed): string
 // Check if a file has been uploaded
 if (isset($_FILES["pdf"])) {
 
+ $file_hash = hash_file("sha256", $_FILES["pdf"]["tmp_name"]);
+ $zip_hash  = hash_file("sha256", $_FILES["zip"]["tmp_name"]);
+
  $file_location    = store($_FILES["pdf"], ["application/pdf"]);
  $archive_location = store($_FILES["zip"], ["application/zip", "application/x-gzip"]);
 
  // Add entry to database
  $pdo   = get_db();
- $stmt  = $pdo->prepare('INSERT INTO publications (title, author, date, abstract, keyword, path, path_zip, type, password) VALUES (:title, :author, :date, :abstract, :keyword, :path, :path_zip, :type, :password)');
- $query = [":title" => $_POST["title"], ":author" => $_POST["author"], ":date" => $_POST["date"], ":abstract" => $_POST["abstract"], ":keyword" => $_POST["keywords"], ":path" => $file_location, ":path_zip" => $archive_location, ":type" => $_POST["pubtype"], ":password" => password_hash($_POST["password"], PASSWORD_DEFAULT)];
+ $stmt  = $pdo->prepare('INSERT INTO publications (title, author, date, abstract, keyword, path, pdf_hash, path_zip, zip_hash, type, password) VALUES (:title, :author, :date, :abstract, :keyword, :path, :f_hash, :path_zip, :z_hash, :type, :password)');
+ $query = [
+  ":title"    => $_POST["title"],
+  ":author"   => $_POST["author"],
+  ":date"     => $_POST["date"],
+  ":abstract" => $_POST["abstract"],
+  ":keyword"  => $_POST["keywords"],
+  ":path"     => $file_location,
+  ":f_hash"   => $file_hash,
+  ":path_zip" => $archive_location,
+  ":z_hash"   => $zip_hash,
+  ":type"     => $_POST["pubtype"],
+  ":password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
+ ];
  $stmt->execute($query);
 
  $id = $pdo->lastInsertId();
