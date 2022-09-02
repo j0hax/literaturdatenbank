@@ -1,25 +1,27 @@
 <?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use PHPOnCouch\CouchClient;
+
+function get_uri()
+{
+    $dbhost = getenv("COUCHDB_HOST");
+    $user = getenv("COUCHDB_USER");
+    $pass = getenv("COUCHDB_PASSWORD");
+
+    return "http://$user:$pass@$dbhost:5984";
+}
+
 function get_db()
 {
- $host = 'db';
- $db   = 'ikm';
- $user = getenv('DB_USER');
- $pass = getenv('DB_PASSWORD');
 
- $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
- try {
-  $pdo = new PDO($dsn, $user, $pass);
+    $client = new CouchClient(get_uri(), 'literaturdatenbank');
+    if (!$client->databaseExists()) {
+        $client->createDatabase();
+    }
 
-  // Execute setup script
-  $setup  = file_get_contents(__DIR__ . "/setup.sql");
-  $result = $pdo->exec($setup);
-
-  $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  return $pdo;
- } catch (PDOException $e) {
-  die('Database Error; Code ' . $e->getCode() . ": " . $e->getMessage());
- }
+    return $client;
 }
 
 // Types of Documents supported by BibTex

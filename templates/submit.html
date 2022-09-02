@@ -57,15 +57,12 @@
                 </div>
             </div>
             <div class="uk-margin">
-                <label class="uk-form-label" for="pdf">PDF-Datei</label>
+                <label class="uk-form-label" for="pdf">Dateien</label>
                 <div class="uk-form-controls">
-                    <input type="file" name="pdf" required>
-                </div>
-            </div>
-            <div class="uk-margin">
-                <label class="uk-form-label" for="zip">ZIP-Datei</label>
-                <div class="uk-form-controls">
-                    <input type="file" name="zip" required>
+                    <input type="file" name="files[]" required multiple>
+                    <p>
+                        Hier können <em>mehrere</em> Dateien hochgeladen werden.
+                    </p>
                 </div>
             </div>
             <div class="uk-margin">

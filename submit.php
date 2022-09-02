@@ -5,92 +5,53 @@ require_once __DIR__ . '/include/database.php';
 require_once __DIR__ . '/include/mail.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
-$twig   = new \Twig\Environment($loader, [
- 'cache' => '/tmp',
+$twig = new \Twig\Environment($loader, [
+    'cache' => '/tmp',
 ]);
 
 use Twig\Extra\String\StringExtension;
 $twig->addExtension(new StringExtension());
 
-function sanitize(string $filename)
-{
- // Lowercase
- $result = strtolower($filename);
-
- // Spaces to underscores
- $result = str_replace(" ", "_", $result);
-
- // Allow only alphanumeric, underscore, period and dash
- return preg_replace("/[^a-z0-9_.\-]+/", "", $result);
-}
-
-function store(array $file, array $allowed): string
-{
- $errcode = $file["error"];
- if ($errcode != UPLOAD_ERR_OK) {
-  die("Fehler beim hochladen der Datei. Fehlercode: " . $errcode);
- }
-
- $order = [sanitize($_POST["date"]), sanitize($_POST["author"]), sanitize($_POST["title"])];
-
- $dir = join(DIRECTORY_SEPARATOR, $order);
-
- # TODO: configurable data dir
- $datadir = "data" . DIRECTORY_SEPARATOR;
-
- if (!file_exists($datadir . $dir)) {
-  mkdir($datadir . $dir, 0755, true);
- }
-
- $tmp_name = $file["tmp_name"];
- $mtype    = mime_content_type($tmp_name);
-
- # Ensure the file is of the correct MIME type
- if (!in_array($mtype, $allowed)) {
-  die("Fehler: falsche Dateiart für " . $file["name"] . ", erwarte eins von " . implode(", ", $allowed));
- }
-
- $file_location = join(DIRECTORY_SEPARATOR, [$dir, sanitize($file["name"])]);
-
- move_uploaded_file($tmp_name, $datadir . $file_location);
-
- return $file_location;
-}
-
 // Check if a file has been uploaded
-if (isset($_FILES["pdf"])) {
+if (isset($_FILES["files"])) {
 
- $file_hash = hash_file("sha256", $_FILES["pdf"]["tmp_name"]);
- $zip_hash  = hash_file("sha256", $_FILES["zip"]["tmp_name"]);
+    $doc = new stdClass();
 
- $file_location    = store($_FILES["pdf"], ["application/pdf"]);
- $archive_location = store($_FILES["zip"], ["application/zip", "application/x-gzip"]);
+    $doc->title = $_POST["title"];
+    $doc->author = $_POST["author"];
+    $doc->date = $_POST["date"];
+    $doc->abstract = $_POST["abstract"];
+    $doc->keywords = array_map('trim', explode(',', $_POST["keywords"]));
+    $doc->type = $_POST["pubtype"];
+    $doc->password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
- // Add entry to database
- $pdo   = get_db();
- $stmt  = $pdo->prepare('INSERT INTO publications (title, author, date, abstract, keyword, path, pdf_hash, path_zip, zip_hash, type, password) VALUES (:title, :author, :date, :abstract, :keyword, :path, :f_hash, :path_zip, :z_hash, :type, :password)');
- $query = [
-  ":title"    => $_POST["title"],
-  ":author"   => $_POST["author"],
-  ":date"     => $_POST["date"],
-  ":abstract" => $_POST["abstract"],
-  ":keyword"  => $_POST["keywords"],
-  ":path"     => $file_location,
-  ":f_hash"   => $file_hash,
-  ":path_zip" => $archive_location,
-  ":z_hash"   => $zip_hash,
-  ":type"     => $_POST["pubtype"],
-  ":password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
- ];
- $stmt->execute($query);
+    $couch = get_db();
 
- $id = $pdo->lastInsertId();
+    // Store the document entry first and get its metadata
+    $response = $couch->storeDoc($doc);
 
- sendMail(getenv('ADMIN_EMAIL'), "Neuer Eintrag", "Ein neuer Eintrag wurde in der Literaturdatenbank erstellt (ID $id)");
+    $total = count($_FILES['files']['name']);
 
- // Redirect to the new document page
- header("Location: /document.php?id=" . $id);
- die();
+    for ($i = 0; $i < $total; $i++) {
+        $doc = $couch->getDoc($response->id);
+
+        $name = $_FILES['files']['name'][$i];
+        $loc = $_FILES['files']['tmp_name'][$i];
+        $type = $_FILES['files']['type'][$i];
+
+        $response = $couch->storeAttachment($doc, $loc, $type, $name);
+    }
+
+    if ($response->ok) {
+        $id = $response->id;
+
+        // Redirect to the new document page
+        header("Location: /document.php?id=" . $id);
+    } else {
+        var_dump($response);
+    }
+
+    die();
 }
 
 echo $twig->render('submit.html', ['doctypes' => DOC_TYPES]);

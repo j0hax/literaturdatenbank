@@ -4,6 +4,7 @@
         "uikit/uikit": "^3.14",
         "twig/string-extra": "^3.4",
         "mathjax/mathjax": "^3.2",
-        "phpmailer/phpmailer": "^6.6"
+        "phpmailer/phpmailer": "^6.6",
+        "php-on-couch/php-on-couch": "^4.0"
     }
 }
