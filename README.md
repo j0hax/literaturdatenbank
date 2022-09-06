@@ -1,7 +1,7 @@
 # literatur-datenbank
 
 [![Docker](https://github.com/j0hax/literatur-datenbank/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/j0hax/literatur-datenbank/actions/workflows/docker-publish.yml)
-[![Lint Code Base](https://github.com/j0hax/literatur-datenbank/actions/workflows/super-linter.yml/badge.svg)](https://github.com/j0hax/literatur-datenbank/actions/workflows/super-linter.yml)
+[![CouchDB](https://img.shields.io/badge/Apache%20CouchDB-EA2328?logo=apachecouchdb)](https://couchdb.apache.org/)
 
 Neue literaturdatenbank für das Institut für Kontinuumsmechanik
 
@@ -27,8 +27,6 @@ Neue literaturdatenbank für das Institut für Kontinuumsmechanik
 <br>
 
 Die Literaturdatenbank samt Datenbank wird am einfachsten mit [Docker Compose](https://docs.docker.com/compose/) installiert. Eine [Referenzdatei](/docker-compose.yaml) ist vorhanden.
-
-Variablen wie `$DBUSER` und `$DBPASSWORD` müssen in einer .env-Datei gespeichert werden.
 
 </details>
 
