@@ -1,41 +1,17 @@
 version: "3"
 services:
   db:
-    image: mariadb:latest
+    image: couchdb:latest
     restart: always
     environment:
-      - MARIADB_DATABASE=$DB
-      - MARIADB_USER=$DBUSER
-      - MARIADB_PASSWORD=$DBPASSWORD
-      - MARIADB_RANDOM_ROOT_PASSWORD=true
-      - MARIADB_AUTO_UPGRADE=true
-    volumes:
-      - sqldata:/var/lib/mysql
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
   web:
     build: .
     restart: always
     environment:
-      - DB_USER=$DBUSER
-      - DB_PASSWORD=$DBPASSWORD
-      - SMTP_SERVER=$SMTP_SERVER
-      - ADMIN_EMAIL=$ADMIN_EMAIL
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+      - COUCHDB_HOST=db
     ports:
       - "8080:80"
-    volumes:
-      - files:/var/www/html/data
-  beisitzer:
-    image: ghcr.io/j0hax/beisitzer:main
-    restart: always
-    environment:
-      - DB_USER=$DBUSER
-      - DB_PASSWORD=$DBPASSWORD
-    volumes:
-      - files:/data
-  watchtower:
-    image: containrrr/watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-volumes:
-  files:
-  sqldata:

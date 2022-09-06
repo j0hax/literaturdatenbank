@@ -22,22 +22,22 @@
         <ul class="uk-switcher">
             <li>
                 <ul class="uk-list uk-list-divider">
-                    {% if document.path %}
-                    <li><span uk-icon="file-pdf"></span> <a href="/data/{{ document.path }}">PDF Ansehen</a></li>
-                    {% endif %}
-                    {% if document.path_zip %}
-                    <li><span uk-icon="folder"></span> <a href="/data/{{ document.path_zip }}" download>Archiv
-                            Herunterladen</a>
+                    {% for key, value in document._attachments | sort %}
+                    <li>
+                        <a href="/download.php?{{ {'id': document._id, 'file': key} | url_encode }}">
+                            <span uk-icon="download"></span>
+                            {{ key }} ({{ (value.length / (1024 * 1024))|round(2, 'ceil') }} MiB)
+                        </a>
                     </li>
-                    {% endif %}
+                    {% endfor %}
                 </ul>
             </li>
             <li>
                 <h4>APA Style</h4>
                 <blockquote uk-tooltip="title: Automatisch generiert und ohne Gewähr; pos: bottom">{{ document.author
                     }}. ({{
-                    document.date | date("Y") }}). {{ document.title | title }} (Document No. {{
-                    document.id }}) [{{ document.type | title }}, Leibniz Universität Hannover]</blockquote>
+                    document.date | date("Y") }}). {{ document.title | title }} (Document ID {{
+                    document._id }}) [{{ document.type | title }}, Leibniz Universität Hannover]</blockquote>
                 <h4>BibTeX</h4>
                 <pre>
 @{{ document.type }}{{ '{' ~ document.author | split(' ') | last ~ document.date | date("Y") }}
@@ -65,9 +65,6 @@
                         <label class="uk-form-label" for="author">Autor(en)</label>
                         <div class="uk-form-controls">
                             <input class="uk-input" id="author" type="text" name="author" value="{{ document.author }}">
-                            <small>
-                                <p>Für die besten Ergebnisse, bitte nur Initialien und Nachnamen eingeben.</p>
-                            </small>
                         </div>
                     </div>
 
@@ -103,7 +100,7 @@
                         <label class="uk-form-label" for="keywords">Schlagwörter</label>
                         <div class="uk-form-controls">
                             <input class="uk-input" id="keywords" type="text" name="keywords"
-                                value="{{ document.keyword }}">
+                                value="{{ document.keywords | join(', ') }}">
                             <p>
                                 Hier können Komma-getrennte Schlagwörter eingegeben werden.
                             </p>
@@ -119,11 +116,14 @@
                                 <em>Achtung:</em> das Password für dieses Dokument nach der Bearbeitung dauerhaft
                                 gesetzt, und muss bei jeder nachträglichen Bearbeitung wieder eingegeben werden.
                             </p>
+                            <p>
+                                Bei speziellen Änderungen, fragen Sie bitte ihren Systemadministrator.
+                            </p>
                             {% endif %}
                         </div>
                     </div>
 
-                    <input type="hidden" name="id" value="{{ document.id }}">
+                    <input type="hidden" name="id" value="{{ document._id }}">
                     <div class="uk-margin">
                         <div class="uk-form-controls">
                             <input type="submit" value="Speichern" class="uk-button uk-button-primary">

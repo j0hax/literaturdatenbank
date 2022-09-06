@@ -91,7 +91,7 @@
             </div>
             {% endif %}
             <div class="uk-card-header">
-                <h3 class="uk-card-title"><a href="/document.php?id={{ pub.id }}" target="_blank">{{ pub.title }}</a>
+                <h3 class="uk-card-title"><a href="/document.php?id={{ pub._id }}" target="_blank">{{ pub.title }}</a>
                 </h3>
                 <h4 class="uk-text-meta">{{ pub.author }} ({{ pub.type | title }}, {{ pub.date | date("Y") }})</h4>
             </div>
@@ -103,12 +103,10 @@
                 {% endif %}
             </div>
             <div class="uk-card-footer">
-                {% if pub.keyword is not empty %}
-                {% for keyword in pub.keyword | replace({';': ',', ':': ','}) | split(',') %}
+                {% for keyword in pub.keywords %}
                 <span class="uk-badge">{{keyword | title}}</span>
                 {% endfor %}
-                {% endif %}
-                <p class="uk-align-right">#{{ pub.id }}</p>
+                <p class="uk-align-right">#{{ pub._id }}</p>
             </div>
         </div>
         {% endfor %}
