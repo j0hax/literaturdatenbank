@@ -44,9 +44,9 @@
                 <label class="uk-form-label" for="form-horizontal-select">Art</label>
                 <div class="uk-form-controls">
                     <select class="uk-select" id="form-horizontal-select" name="pubtype">
-                        <option value="%">Alles</option>
+                        <option value=".*">Alles</option>
                         {% for key,value in doctypes %}
-                        <option value="{{key}} {% if qtype==key %}selected{% endif %}">
+                        <option value="{{key}}" {% if qtype==key %}selected{% endif %}>
                             {{value}}
                         </option>
                         {% endfor %}
@@ -77,9 +77,8 @@
         {% if publications | length == 0 %}
         <h2>Keine Übereinstimmungen :(</h2>
         <p>Leider wurden keine Werke gefunden. Bitte überprüfen Sie ihre Sucheinstellungen erneut.</p>
-        <p><strong>Tipp:</strong> Im Titel- und Autorenfeld kann <a
-                href="https://dev.mysql.com/doc/refman/8.0/en/pattern-matching.html" target="_blank">SQL Pattern
-                Matching</a>
+        <p><strong>Tipp:</strong> Im Titel- und Autorenfeld können <a href="https://regexr.com/" target="_blank">regular
+                expressions</a>
             verwendet werden.</p>
         {% endif %}
 

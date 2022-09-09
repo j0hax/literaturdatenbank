@@ -18,27 +18,22 @@ if (isset($_GET["title"])) {
     // Prcess our inputs
     $title = $_GET['title'];
     $author = ucwords($_GET["author"]);
-    $begin = intval($_GET["begin"]) . "-01-01";
-    $end = intval($_GET["end"]) + 1 . "-01-01";
+    $begin = intval($_GET["begin"]) . "-01-01T00:00:00Z";
+    $end = intval($_GET["end"]) + 1 . "-01-01T00:00:00Z";
     $type = strtolower($_GET["pubtype"]);
     $searchType = $_GET["searchtype"];
 
     // Check if we are searching for title/keywords or the full text
     $selector = [
-        'year' => ['$gte' => $begin, '$lte' => $end],
+        'title' => ['$regex' => "(?i)($title)"],
+        'author' => ['$regex' => "(?i)($author)"],
+        'date' => ['$gte' => $begin, '$lte' => $end],
+        'type' => ['$regex' => "^$type\$"],
     ];
 
-    //$pubs = $couch->find([year => ""]);
+    $result = $couch->find($selector);
 
-    $pubs = [];
-    $all = $couch->getAllDocs();
-
-    foreach ($all->rows as $row) {
-        $doc = $couch->asArray()->getDoc($row->id);
-        array_push($pubs, $doc);
-    }
-
-    echo $twig->render('index.html', ['doctypes' => DOC_TYPES, 'publications' => $pubs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type, 'stype' => $searchType]);
+    echo $twig->render('index.html', ['doctypes' => DOC_TYPES, 'publications' => $result->docs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type, 'stype' => $searchType]);
 } else {
     echo $twig->render('index.html', ['doctypes' => DOC_TYPES]);
 }
