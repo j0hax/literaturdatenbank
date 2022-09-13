@@ -894,16 +894,16 @@
         },
         {
             "name": "uikit/uikit",
-            "version": "v3.15.5",
+            "version": "v3.15.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uikit/uikit.git",
-                "reference": "c50896269c38a6fc6aedadb68ffc2b0c5514d36f"
+                "reference": "fc11eb47208073ae7e907e00df98c5bd30d9cf1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uikit/uikit/zipball/c50896269c38a6fc6aedadb68ffc2b0c5514d36f",
-                "reference": "c50896269c38a6fc6aedadb68ffc2b0c5514d36f",
+                "url": "https://api.github.com/repos/uikit/uikit/zipball/fc11eb47208073ae7e907e00df98c5bd30d9cf1f",
+                "reference": "fc11eb47208073ae7e907e00df98c5bd30d9cf1f",
                 "shasum": ""
             },
             "type": "library",
@@ -918,13 +918,17 @@
             ],
             "description": "UIkit is a lightweight and modular front-end framework for developing fast and powerful web interfaces.",
             "homepage": "https://getuikit.com/",
+            "support": {
+                "issues": "https://github.com/uikit/uikit/issues",
+                "source": "https://github.com/uikit/uikit/tree/v3.15.6"
+            },
             "funding": [
                 {
                     "url": "https://github.com/uikit",
                     "type": "github"
                 }
             ],
-            "time": "2022-08-24T15:05:30+00:00"
+            "time": "2022-08-31T08:24:53+00:00"
         }
     ],
     "packages-dev": [],
@@ -935,5 +939,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
