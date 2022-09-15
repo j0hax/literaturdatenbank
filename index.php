@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/include/database.php';
+require_once __DIR__ . '/include/helpers.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader, [
@@ -32,6 +33,8 @@ if (isset($_GET["title"])) {
     ];
 
     $result = $couch->find($selector);
+
+    usort($result->docs, "attrsort");
 
     echo $twig->render('index.html', ['doctypes' => DOC_TYPES, 'publications' => $result->docs, 'qtitle' => $title, 'qauth' => $author, 'qstart' => $begin, 'qend' => $end, 'qtype' => $type, 'stype' => $searchType]);
 } else {
