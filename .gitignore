@@ -1,6 +1,6 @@
 # PHP-related
 composer.phar
-/vendor/
+src/vendor/
 
 # Docker-related
 .env
