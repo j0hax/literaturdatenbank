@@ -7,18 +7,10 @@ Neue literaturdatenbank für das Institut für Kontinuumsmechanik
 
 ## Ziele
 
-### FAIR Prinzipien
-
-<dl>
-  <dt>Findable</dt>
-  <dd>Metadaten und Daten sollten sowohl für Menschen als auch für Computer leicht zu finden sein.</dd>
-  <dt>Accessible</dt>
-  <dd>Sobald der Nutzer die gewünschten Daten gefunden hat, muss er wissen, wie er auf sie zugreifen kann.</dd>
-  <dt>Interoperable</dt>
-  <dd>Die Daten müssen in der Regel mit anderen Daten integriert werden können.</dd>
-  <dt>Reusable</dt>
-  <dd>Metadaten und Daten sollten gut beschrieben sein, damit sie in verschiedenen Umgebungen repliziert und/oder kombiniert werden können.</dd>
-</dl>
+- Verbesserung der existieren Datenbank
+  - Modernisierung von Design
+  - Einsatz von neuer Datenbanksoftware
+- Anlehnung an den [FAIR-Prinzipien](FAIR.md)
 
 ## Installation
 
