@@ -18,7 +18,7 @@ Neue literaturdatenbank für das Institut für Kontinuumsmechanik
 <summary>Docker (empfohlen)</summary>
 <br>
 
-Die Literaturdatenbank samt Datenbank wird am einfachsten mit [Docker Compose](https://docs.docker.com/compose/) installiert. Eine [Referenzdatei](/docker-compose.yaml) ist vorhanden.
+Die Literaturdatenbank samt Datenbank wird am einfachsten mit [Docker Compose](https://docs.docker.com/compose/) installiert. Eine [Referenzdatei](/docker-compose.yml) ist vorhanden.
 
 </details>
 
