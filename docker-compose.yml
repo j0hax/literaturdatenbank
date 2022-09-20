@@ -9,11 +9,21 @@ services:
     volumes:
       - couchdb:/opt/couchdb/data
 
+  varnish:
+    image: varnish:latest
+    volumes:
+      - "./default.vcl:/etc/varnish/default.vcl"
+    ports:
+      - "8080:80"
+    environment:
+      - VARNISH_SIZE=2G
+    command: -p default_keep=300
+    depends_on:
+      - web
+
   web:
     image: nginx:latest
     restart: always
-    ports:
-      - "8080:80"
     depends_on:
       - php
     volumes:
