@@ -8,9 +8,10 @@ services:
       - COUCHDB_PASSWORD=password
     volumes:
       - couchdb:/opt/couchdb/data
-  
+
   web:
     image: nginx:latest
+    restart: always
     ports:
       - "8080:80"
     depends_on:
@@ -18,9 +19,9 @@ services:
     volumes:
       - ./site.conf:/etc/nginx/conf.d/default.conf
       - ./src:/var/www/html
-  
+
   php:
-    build: .
+    image: php:8-fpm-alpine
     restart: always
     depends_on:
       - composer
@@ -33,9 +34,14 @@ services:
 
   composer:
     image: composer:latest
-    command: ["composer", "install"]
+    command: [ "composer", "install" ]
     volumes:
       - ./src:/app
-      
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
 volumes:
   couchdb:
