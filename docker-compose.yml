@@ -31,7 +31,7 @@ services:
       - ./src:/var/www/html
 
   php:
-    image: php:8-fpm-alpine
+    image: php:8-fpm
     restart: always
     depends_on:
       - composer
