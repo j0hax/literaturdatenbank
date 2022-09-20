@@ -6,12 +6,31 @@ services:
     environment:
       - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=password
+  
   web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+    volumes:
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - ./src:/var/www/html
+  
+  php:
     build: .
     restart: always
+    depends_on:
+      - composer
+    volumes:
+      - ./src:/var/www/html
     environment:
       - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=password
       - COUCHDB_HOST=db
-    ports:
-      - "8080:80"
+
+  composer:
+    image: composer:latest
+    command: ["composer", "install"]
+    volumes:
+      - ./src:/app
