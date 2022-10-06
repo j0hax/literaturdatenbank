@@ -17,7 +17,6 @@ services:
       - "8080:80"
     environment:
       - VARNISH_SIZE=2G
-    command: -p default_keep=300
     depends_on:
       - web
 
