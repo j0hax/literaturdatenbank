@@ -1,6 +1,6 @@
 vcl 4.1;
 
 backend default {
-    .host = "web";
+    .host = "php";
     .port = "80";
 }
