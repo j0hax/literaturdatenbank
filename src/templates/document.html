@@ -69,9 +69,9 @@
                     </div>
 
                     <div class="uk-margin">
-                        <label class="uk-form-label" for="date">Jahr</label>
+                        <label class="uk-form-label" for="date">Veröffentlichungsdatum</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="date" type="date" name="date" value="{{ document.date }}">
+                            <input class="uk-input" id="date" type="date" name="date" value="{{ document.date|date("Y-m-d") }}">
                         </div>
                     </div>
 
