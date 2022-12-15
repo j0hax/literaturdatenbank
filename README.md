@@ -1,6 +1,6 @@
 # literatur-datenbank
 
-[![Docker](https://github.com/j0hax/literatur-datenbank/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/j0hax/literatur-datenbank/actions/workflows/docker-publish.yml)
+[![Docker](https://github.com/j0hax/literaturdatenbank/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/j0hax/literaturdatenbank/actions/workflows/docker-publish.yml)
 [![CouchDB](https://img.shields.io/badge/Apache%20CouchDB-EA2328?logo=apachecouchdb)](https://couchdb.apache.org/)
 
 Neue literaturdatenbank für das Institut für Kontinuumsmechanik
