@@ -71,8 +71,7 @@
                     <div class="uk-margin">
                         <label class="uk-form-label" for="date">Veröffentlichungsdatum</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="date" type="date" name="date" value="{{ document.date|date("
-                                Y-m-d") }}">
+                            <input class="uk-input" id="date" type="date" name="date" value="{{ document.date|date("Y-m-d") }}">
                         </div>
                     </div>
 
@@ -129,6 +128,10 @@
                         <div class="uk-form-controls">
                             <input type="submit" value="Speichern" class="uk-button uk-button-primary">
                         </div>
+                    </div>
+                    <div class="uk-margin">
+                        <p><em>Aufgrund</em> von Caching ist es möglich, dass es ein paar Minuten dauert, bis Änderungen
+                            angezeigt werden.</p>
                     </div>
                 </form>
             </li>
